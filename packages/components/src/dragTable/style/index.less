@@ -1,0 +1,34 @@
+.title {
+  display: flex;
+
+  .block {
+    padding: 12px 0;
+    font-size: 13px;
+    font-weight: bold;
+    color: #515a6e;
+    text-align: center;
+    word-break: break-word;
+    background-color: #e3e3e3;
+  }
+}
+
+.list {
+  list-style: none;
+
+  .drag-move {
+    transition: transform 0.3s;
+  }
+
+  .list-item {
+    display: flex;
+    width: 100%;
+    cursor: move;
+    background-color: #fafafa;
+
+    .column {
+      padding: 12px 0;
+      text-align: center;
+      border-bottom: 1px solid #dfe6ec;
+    }
+  }
+}

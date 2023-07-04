@@ -1,0 +1,29 @@
+{
+  "name": "cjx-zdy-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "files": [
+    "es",
+    "lib"
+  ],
+  "scripts": {
+    "build": "vite build & esno build/buildLess"
+  },
+  "keywords": [
+    "cjx",
+    "cjx-ui",
+    "cjx-zdy-ui",
+    "vue3组件库"
+  ],
+  "author": "cjx",
+  "license": "MIT",
+  "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@cjx-zdy-ui/utils": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.0"
+  }
+}
