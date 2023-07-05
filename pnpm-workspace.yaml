@@ -1,4 +1,4 @@
 packages:
     - 'packages/**'
     - 'examples'
-    - 'vuePrees2'
+    - 'vuePress2'
