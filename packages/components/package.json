@@ -14,6 +14,6 @@
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@cjx-zdy-ui/utils": "workspace:^"
+    "@npm_cjx/utils": "^1.1.4"
   }
 }

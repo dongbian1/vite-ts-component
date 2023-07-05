@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import Draggable from 'vuedraggable'
+import Draggable from 'vue3-draggable'
 export default {
   name: 'Images',
   components: {

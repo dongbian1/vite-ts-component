@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import Draggable from 'vuedraggable'
+import Draggable from 'vue3-draggable'
 import Product from './DragComponents/View/Product.vue'
 import Images from './DragComponents/View/Images.vue'
 import Banner from './DragComponents/View/Banner.vue'

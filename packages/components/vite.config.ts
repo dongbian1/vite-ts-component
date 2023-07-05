@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import eslint from 'vite-plugin-eslint'
 
 export default defineConfig({
   build: {
@@ -19,7 +18,7 @@ export default defineConfig({
       external: [
         'vue',
         /\.less/,
-        '@cjx-zdy-ui/utils',
+        '@npm_cjx/utils',
         'element-plus',
         '@element-plus/icons-vue'
       ],
@@ -55,7 +54,6 @@ export default defineConfig({
 
   plugins: [
     vue(),
-    eslint(),
     vueJsx(),
     dts({
       entryRoot: './src',

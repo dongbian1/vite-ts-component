@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
-import { handleProp } from '@cjx-zdy-ui/utils'
+import { handleProp } from '@npm_cjx/utils'
 import { ColumnProps } from '@/proTable/types'
 
 defineOptions({

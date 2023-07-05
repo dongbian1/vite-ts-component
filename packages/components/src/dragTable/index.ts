@@ -1,5 +1,5 @@
 import dragTable from './dragTable.vue'
-import { withInstall } from '@cjx-zdy-ui/utils'
+import { withInstall } from '@npm_cjx/utils'
 
 const DragTable = withInstall(dragTable)
 export default DragTable

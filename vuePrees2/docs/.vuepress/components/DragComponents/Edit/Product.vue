@@ -5,7 +5,7 @@
       ><i class="el-icon-plus"></i> 添加商品</el-button
     >
     <template v-if="list.data && list.data.length > 0">
-      <vuedraggable
+      <Draggable
         v-model="list.data"
         tag="ul"
         draggable="li"
@@ -16,7 +16,7 @@
           <img :src="item.productImg" />
           <i class="el-icon-error" @click="deleteItem(index)"></i>
         </li>
-      </vuedraggable>
+      </Draggable>
     </template>
 
     <div class="options">
@@ -71,11 +71,11 @@
 
 <script>
 // import { searchProduct } from '@/api/pageDecoration.js'
-import vuedraggable from 'vuedraggable'
+import Draggable from 'vue3-draggable'
 export default {
   name: 'Product',
   components: {
-    vuedraggable
+    Draggable
   },
   props: {
     data: {

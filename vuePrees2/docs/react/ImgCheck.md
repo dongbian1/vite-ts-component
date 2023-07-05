@@ -10,7 +10,7 @@ date: '2023-5-04'
 <br/>
 本组件支持通过点击切换图片，通过左右键盘按键操作
 
-### 组建代码
+### 组件代码
 
 ```tsx
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'

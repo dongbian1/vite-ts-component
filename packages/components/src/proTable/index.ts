@@ -1,5 +1,5 @@
 import proTable from './proTable.vue'
-import { withInstall } from '@cjx-zdy-ui/utils'
+import { withInstall } from '@npm_cjx/utils'
 
 const ProTable = withInstall(proTable)
 export default ProTable
