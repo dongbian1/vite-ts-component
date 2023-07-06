@@ -17,7 +17,6 @@
     <template #tableHeader="{ selectedListIds, selectedList, isSelected }">
       <el-button type="primary">导出报表</el-button>
       <el-button type="primary" :disabled="!isSelected">批量删除</el-button>
-      <div>{{ selectedListIds }} {{ selectedList }}</div>
     </template>
     <template #action="{ row }">
       <el-button link type="primary"
@@ -27,7 +26,7 @@
   </ProTable>
 </template>
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { ProTable } from 'cjx-zdy-ui'
 import { ColumnProps } from 'cjx-zdy-ui/es/src/proTable/types'
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'

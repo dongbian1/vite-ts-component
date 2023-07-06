@@ -1,0 +1,5 @@
+/public/*
+**/lib
+**/es
+**/.cache
+**/.temp
