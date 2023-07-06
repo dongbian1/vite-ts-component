@@ -31,7 +31,7 @@ date: '2023-2-13'
 ```vue
 <section class="c">
   <div class="top-nav" @click="selectType(0)">
-    <img :src="$withBase('/topNavBlack.png')" />
+    <img :src="http://rw8irwnr8.hn-bkt.clouddn.com/topNavBlack.png" />
     <span class="tit">{{ info.title }}</span>
   </div>
   <div class="view-content" @drop="drog" @dragover="dragOver" :style="{ backgroundColor: info.backgroundColor }">

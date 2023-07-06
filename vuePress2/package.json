@@ -14,9 +14,9 @@
     "vuepress-plugin-copy-code2": "^2.0.0-beta.216"
   },
   "dependencies": {
-    "cjx-zdy-ui": "workspace:^",
+    "cjx-zdy-ui": "^1.1.6",
     "unplugin-auto-import": "^0.11.4",
     "unplugin-vue-components": "^0.22.9",
-    "vue3-draggable": "^2.0.9"
+    "vuedraggable": "^4.1.0"
   }
 }

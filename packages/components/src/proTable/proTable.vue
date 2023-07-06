@@ -151,7 +151,7 @@ export interface ProTableProps {
   requestApi?: (params: any) => Promise<any> // 请求表格数据的 api ==> 非必传
   requestAuto?: boolean // 是否自动执行请求 api ==> 非必传（默认为true）
   requestError?: (params: any) => void // 表格 api 请求错误监听 ==> 非必传
-  beforeSearchSubmit?: (params: any) => void // api 请求参数格式化 ==> 非必传
+  beforeSearchSubmit?: (params: any) => {} // api 请求参数格式化 ==> 非必传
   dataCallback?: (data: any) => any // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
   pagination?: boolean // 是否需要分页组件 ==> 非必传（默认为true）
   initParam?: any // 初始化请求参数 ==> 非必传（默认为{}）
@@ -357,4 +357,3 @@ defineExpose({
   selectedListIds
 })
 </script>
-@cjx-zdy-ui/utils/t-utils/utils

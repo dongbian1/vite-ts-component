@@ -46,7 +46,7 @@ const getTabsList = () => {
 
 const formatParams = (params: any) => {
   console.log(params)
-  return { ...params, 1: 1 }
+  return { ...params, 2: 1 }
 }
 
 const formatData = (data: any) => {

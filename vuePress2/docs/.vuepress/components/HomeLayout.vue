@@ -3,7 +3,10 @@
     <div class="top">
       <div class="title">个人简介</div>
       <div class="avatar_div">
-        <img class="avatar" :src="withBase('/avatar.jpeg')" />
+        <img
+          class="avatar"
+          src="http://rw8irwnr8.hn-bkt.clouddn.com/avatar.jpeg"
+        />
         <div class="test">海賊王になりたい男です</div>
       </div>
     </div>
@@ -113,8 +116,17 @@ const state = reactive({
       key: 11,
       title: '批量下载浏览器图片',
       path: '/vue/DownloadZip',
+      date: '2023-5-25',
       author: '陈佳鑫',
       explain: '使用`jszip`压缩图片打包成ZIP，通过`file-saver`进行浏览器下载'
+    },
+    {
+      key: 12,
+      title: 'ProTable API',
+      path: '/vue/ProTable',
+      date: '2023-7-06',
+      author: '陈佳鑫',
+      explain: '使用 Vite + Vue 3 开发高级表格组件使用说明'
     }
   ]
 })

@@ -26,7 +26,8 @@ module.exports = [
       { text: '卡牌抽奖小游戏', link: '/vue/TurnOver' },
       { text: '动态Modal弹出框', link: '/vue/FlexibleModal' },
       { text: 'Vue 拖拽编辑界面', link: '/vue/DragVue' },
-      { text: '批量下载浏览器图片', link: '/vue/DownloadZip' }
+      { text: '批量下载浏览器图片', link: '/vue/DownloadZip' },
+      { text: 'ProTable API', link: '/vue/ProTable' }
     ]
   }
 ]

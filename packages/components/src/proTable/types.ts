@@ -69,7 +69,7 @@ export interface ColumnProps<T = any>
     Omit<TableColumnCtx<T>, 'children' | 'renderCell' | 'renderHeader'>
   > {
   isTag?: boolean // 是否是标签展示
-  hideInTable?: boolean // 是否显示在表格当中
+  hideInTable?: boolean // 是在表格当中隐藏
   search?: SearchProps | undefined // 搜索项配置
   enum?: EnumProps[] | ((params?: any) => Promise<any>) // 枚举类型（字典）
   isFilterEnum?: boolean // 当前单元格值是否根据 enum 格式化（示例：enum 只作为搜索项数据）

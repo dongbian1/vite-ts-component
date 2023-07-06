@@ -1,6 +1,6 @@
 {
   "name": "cjx-zdy-ui",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.mjs",
@@ -21,7 +21,7 @@
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@npm_cjx/utils": "^1.1.4"
+    "@npm_cjx/utils": "^1.1.5"
   },
   "devDependencies": {
     "@types/node": "^20.3.0"

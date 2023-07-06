@@ -12,10 +12,12 @@
         v-if="list.data && list.data.length > 0"
         class="list"
       >
-        <li class="item" v-for="(item, index) in list.data" :key="index">
-          <img :src="item.productImg" />
+      <template #item="{element, index}">
+        <li class="item" :key="index">
+          <img :src="element.productImg" />
           <i class="el-icon-error" @click="deleteItem(index)"></i>
         </li>
+      </template>
       </Draggable>
     </template>
 
@@ -71,7 +73,7 @@
 
 <script>
 // import { searchProduct } from '@/api/pageDecoration.js'
-import Draggable from 'vue3-draggable'
+import Draggable from 'vuedraggable'
 export default {
   name: 'Product',
   components: {

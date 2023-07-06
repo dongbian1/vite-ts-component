@@ -88,7 +88,7 @@ countSize(width) {
             height: `${(totalHeight / 2) * 1.5}px`,
             width: `${(totalHeight - 20) * 0.5}px`
           }"
-          :src="$withBase('/猫.jpg')"
+          src="http://rw8irwnr8.hn-bkt.clouddn.com/%E7%8C%AB.jpg"
         />
         <i
           :style="{

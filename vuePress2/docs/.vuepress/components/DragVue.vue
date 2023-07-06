@@ -15,7 +15,7 @@
     </section>
     <section class="c">
       <div class="top-nav" @click="selectType(0)">
-        <img :src="$withBase('/topNavBlack.png')" />
+        <img src="http://rw8irwnr8.hn-bkt.clouddn.com/topNavBlack.png" />
         <span class="tit">{{ info.title }}</span>
       </div>
       <div
@@ -24,8 +24,8 @@
         @dragover="dragOver"
         :style="{ backgroundColor: info.backgroundColor }"
       >
-        <Draggable v-model="view" draggable=".item">
-          <template v-for="(item, index) in view">
+        <Draggable v-model="view">
+          <template #item="{element}">
             <div
               v-if="index > 0"
               :data-index="index"
@@ -34,14 +34,14 @@
               @click="selectType(index)"
             >
               <!-- waiting -->
-              <template v-if="item.status && item.status == 2">
-                <div class="wait">{{ item.type }}</div>
+              <template v-if="element.status && element.status == 2">
+                <div class="wait">{{ element.type }}</div>
               </template>
               <template v-else>
                 <component
-                  :is="typeList[item.type]['com']"
-                  :data="item"
-                  :className="className[item.tabType]"
+                  :is="typeList[element.type]['com']"
+                  :data="element"
+                  :className="className[element.tabType]"
                 >
                 </component>
               </template>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import Draggable from 'vue3-draggable'
+import Draggable from 'vuedraggable'
 import Product from './DragComponents/View/Product.vue'
 import Images from './DragComponents/View/Images.vue'
 import Banner from './DragComponents/View/Banner.vue'

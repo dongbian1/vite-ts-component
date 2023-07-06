@@ -16,7 +16,7 @@ export const useTable = (
   isPageable = true,
   tabsKey?: string,
   dataCallBack?: (data: any) => any,
-  beforeSearchSubmit?: (params: any) => any,
+  beforeSearchSubmit?: (params: any) => {},
   requestError?: (error: any) => void
 ) => {
   const state = reactive<Table.TableStateProps>({

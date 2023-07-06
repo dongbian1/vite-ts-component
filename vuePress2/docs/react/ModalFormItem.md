@@ -6,7 +6,7 @@ date: '2022-10-13'
 
 简单化普通表单模块新增及修改，减少编写 modal 的代码特此组件化
 <br/>
-<img class="avatar" :src="$withBase('/ModalForm/material.jpg')">
+<img class="avatar" src="http://rw8irwnr8.hn-bkt.clouddn.com/material.jpg">
 
 ## From 组件类型创建
 
@@ -38,17 +38,17 @@ export default interface ModalFormItem {
 }
 ```
 
-| 属性         | 类型             | 说明                                                       |
-| :----------- | :--------------- | :--------------------------------------------------------- | ------------------------- | -------- | ------ | ------ | ----- | ------ | ---------- | ---------- | ------- | ------------ |
-| title        | string           | 表单标题                                                   |
-| type         | `input           | password                                                   | inputNumber               | textArea | select | switch | radio | upload | datePicker | treeSelect | render` | 渲染组件类型 |
-| name         | string           | Form 表单 name 属性                                        |
-| rules        | `Array<Rule>`    | Form 表单验证规则                                          |
-| selectArr    | `Array<any>`     | select cascader switch radio treeSelect 等组件 Option 数据 |
-| disabled     | disabled         | 禁用当前组件                                               |
-| uploadNumber | number           | upload 组件上传最大值                                      |
-| render       | `React.ReactNode | React.ReactNode[]`                                         | render 函数可重写当前组件 |
-| onChange     | `(e: string      | number) => void`                                           | 改变函数                  |
+| 属性         | 类型                                                                                                              | 说明                                                       |
+| :----------- | :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- |
+| title        | string                                                                                                            | 表单标题                                                   |
+| type         | `input` `password` `inputNumber` `textArea` `select` `switch` `radio` `upload` `datePicker` `treeSelect` `render` | 渲染组件类型                                               |
+| name         | string                                                                                                            | Form 表单 name 属性                                        |
+| rules        | `Array<Rule>`                                                                                                     | Form 表单验证规则                                          |
+| selectArr    | `Array<any>`                                                                                                      | select cascader switch radio treeSelect 等组件 Option 数据 |
+| disabled     | disabled                                                                                                          | 禁用当前组件                                               |
+| uploadNumber | number                                                                                                            | upload 组件上传最大值                                      |
+| render       | `React.ReactNode` `React.ReactNode[]`                                                                             | render 函数可重写当前组件                                  |
+| onChange     | `(e: string  number) => void`                                                                                     | 改变函数                                                   |
 
 ## Modal 组件
 
@@ -73,17 +73,17 @@ interface IOperateModal extends ModalProps {
 }
 ```
 
-| 属性            | 类型                                              | 说明                                               |
-| :-------------- | :------------------------------------------------ | :------------------------------------------------- | ---------------------- |
-| data            | `any                                              | null`                                              | Form 数据              |
-| type            | `add                                              | update`                                            | add: 新增 update: 修改 |
-| form            | FormInstance                                      | Form 对象                                          |
-| typeSetting     | `one                                              | two`                                               | 每行显示组件个数       |
-| onSubmit        | Function                                          | Form 提交函数                                      |
-| formItem        | `Array<ModalFormItem>`                            | Form 渲染对象                                      |
-| modalFooter     | (ok: () => void, cancel: () => void) => ReactNode | 自定义底部按钮                                     |
-| modalOkCall     | () => void                                        | 自定义按钮 ok 事件，如果未传入将调用 onSubmit 方法 |
-| modalCancelCall | () => void                                        | 自定义按钮取消事件，如果为传入将调用 onCancel 事件 |
+| 属性            | 类型                                                | 说明                                               |
+| :-------------- | :-------------------------------------------------- | :------------------------------------------------- |
+| data            | `any` `null` `Form`                                 | 数据                                               |
+| type            | `add` `update`                                      | add: 新增 update: 修改                             |
+| form            | `FormInstance`                                      | Form 对象                                          |
+| typeSetting     | `one` `two`                                         | 每行显示组件个数                                   |
+| onSubmit        | `Function`                                          | Form 提交函数                                      |
+| formItem        | `Array<ModalFormItem>`                              | Form 渲染对象                                      |
+| modalFooter     | `(ok: () => void, cancel: () => void) => ReactNode` | 自定义底部按钮                                     |
+| modalOkCall     | `() => void`                                        | 自定义按钮 ok 事件，如果未传入将调用 onSubmit 方法 |
+| modalCancelCall | `() => void`                                        | 自定义按钮取消事件，如果为传入将调用 onCancel 事件 |
 
 ### 创建 OperateModal 组件
 

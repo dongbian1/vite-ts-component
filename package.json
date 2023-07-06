@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "ui:build": "gulp -f packages/components/script/build/gulpfile.ts",
-    "utils:build": "pnpm run --filter ./packages/utils build",
     "ui:dev": "pnpm run --filter ./examples dev",
+    "utils:build": "pnpm run --filter ./packages/utils build",
     "docs:dev": "pnpm run --filter ./vuePress2 docs:dev",
+    "docs:build": "pnpm run --filter ./vuePress2 docs:build",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\""
   },

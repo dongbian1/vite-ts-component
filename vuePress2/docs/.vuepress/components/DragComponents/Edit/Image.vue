@@ -10,25 +10,26 @@
       class="image-list"
       :class="{ disable: data.tabType == 2 }"
     >
-      <li v-for="(item, index) in list.data" :key="index">
+    <template #item="{element, index}">
+      <li  :key="index">
         <div class="l-info">
           <p>
             <span class="sort">排序{{ index + 1 }}</span>
           </p>
           <p>
             <span>名称：</span>
-            <span class="text">{{ item && item.name }}</span>
+            <span class="text">{{ element && element.name }}</span>
           </p>
           <p>
             <span>链接：</span>
             <el-tooltip
               effect="dark"
-              :content="item.link"
+              :content="element.link"
               placement="top"
-              v-if="item.link"
+              v-if="element.link"
             >
-              <span class="text" @click="urlPopup(index, item.link)">{{
-                item.link
+              <span class="text" @click="urlPopup(index, element.link)">{{
+                element.link
               }}</span>
             </el-tooltip>
             <span v-else @click="urlPopup(index)" class="link"
@@ -39,11 +40,12 @@
         <div class="r-image">
           <span @click="removeImage(index)" class="el-icon-close"></span>
           <div class="image-box">
-            <img :src="item && item.url" />
+            <img :src="element && element.url" />
             <span @click="addImage(index)" class="el-icon-edit-outline"></span>
           </div>
         </div>
       </li>
+    </template>
     </Draggable>
     <template v-if="list.data && list.data.length < len">
       <el-button
@@ -79,7 +81,7 @@
 </template>
 
 <script>
-import Draggable from 'vue3-draggable'
+import Draggable from 'vuedraggable'
 export default {
   name: 'Images',
   components: {
