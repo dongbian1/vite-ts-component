@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="top">
-      <div class="title">个人简介</div>
+      <div class="homeTitle">个人简介</div>
       <div class="avatar_div">
         <img class="avatar" :src="withBase('/avatar.jpeg')">
         <div class="test">海賊王になりたい男です</div>
