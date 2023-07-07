@@ -52,7 +52,7 @@ import { ProTable } from 'cjx-zdy-ui'
 
 ## 在线文档
 
-[cjx-zdy-ui 文档](https://geeksdidi.gitee.io/kittyui/)
+[cjx-zdy-ui 文档](https://dongbian1.github.io/vite-ts-component/vue/ProTable.html)
 
 ## 组件项目仓库
 

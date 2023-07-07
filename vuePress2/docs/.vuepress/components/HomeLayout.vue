@@ -3,10 +3,7 @@
     <div class="top">
       <div class="title">个人简介</div>
       <div class="avatar_div">
-        <img
-          class="avatar"
-          src="http://rw8irwnr8.hn-bkt.clouddn.com/avatar.jpeg"
-        />
+        <img class="avatar" :src="withBase('/avatar.jpeg')">
         <div class="test">海賊王になりたい男です</div>
       </div>
     </div>

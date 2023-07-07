@@ -40,8 +40,8 @@
             height: `${(totalHeight / 2) * 1.5}px`,
             width: `${(totalHeight - 20) * 0.5}px`
           }"
-          src="http://rw8irwnr8.hn-bkt.clouddn.com/%E7%8C%AB.jpg"
-        />
+          :src="$withBase('/猫.jpg')"
+        >
         <i
           :style="{
             height: `${(totalHeight / 2) * 1.5}px`,

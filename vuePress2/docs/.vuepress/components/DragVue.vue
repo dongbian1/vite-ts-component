@@ -15,7 +15,7 @@
     </section>
     <section class="c">
       <div class="top-nav" @click="selectType(0)">
-        <img src="http://rw8irwnr8.hn-bkt.clouddn.com/topNavBlack.png" />
+        <img :src="$withBase('/topNavBlack.png')" />
         <span class="tit">{{ info.title }}</span>
       </div>
       <div

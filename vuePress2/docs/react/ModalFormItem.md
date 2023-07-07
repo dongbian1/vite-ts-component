@@ -6,7 +6,7 @@ date: '2022-10-13'
 
 简单化普通表单模块新增及修改，减少编写 modal 的代码特此组件化
 <br/>
-<img class="avatar" src="http://rw8irwnr8.hn-bkt.clouddn.com/material.jpg">
+<img class="avatar" :src="$withBase('/ModalForm/material.jpg')">
 
 ## From 组件类型创建
 

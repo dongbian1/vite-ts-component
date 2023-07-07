@@ -10,7 +10,7 @@ import { copyCodePlugin } from 'vuepress-plugin-copy-code2'
 module.exports = {
   title: '马上升天',
   description: '一个不甘平凡又非常平凡的人',
-  base: '/',
+  base: '/vite-ts-component',
   themeConfig: {
     subSidebar: 'light',
     navbar: navbar
@@ -46,7 +46,7 @@ module.exports = {
     // 在这里进行配置
     navbar,
     sidebar,
-    colorMode: 'dark',
+    colorMode: 'light', // dark
     colorModeSwitch: true
   }),
   plugins: [

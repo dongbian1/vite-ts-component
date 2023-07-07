@@ -15,7 +15,8 @@
 
 
 ### 图片展示
-![ProTable](http://rw8irwnr8.hn-bkt.clouddn.com/ProTable.png)
+<br/>
+<img class="avatar" :src="$withBase('/ModalForm/ProTable.png')">
 
 ### 代码展示
 ::: warning 注意
