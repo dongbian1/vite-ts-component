@@ -16,7 +16,7 @@
 
 ### 图片展示
 <br/>
-<img class="avatar" :src="$withBase('/ModalForm/ProTable.png')">
+<img class="avatar" :src="$withBase('/ProTable.png')">
 
 ### 代码展示
 ::: warning 注意
