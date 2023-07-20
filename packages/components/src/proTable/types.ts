@@ -1,6 +1,8 @@
-import { VNode } from 'vue'
+import { ComponentPublicInstance, VNode } from 'vue'
 import { BreakPoint, Responsive } from '@/grid/types'
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
+import ProTable from '.'
+import { ProTableProps } from './proTable.vue'
 
 export interface EnumProps {
   label: string // 选项框显示的文字
@@ -78,3 +80,5 @@ export interface ColumnProps<T = any>
   render?: (scope: RenderScope<T>) => VNode | string // 自定义单元格内容渲染（tsx语法）
   _children?: ColumnProps<T>[] // 多级表头
 }
+
+export type ProTableInstance = Omit<InstanceType<typeof ProTable>, keyof ComponentPublicInstance | keyof ProTableProps>;

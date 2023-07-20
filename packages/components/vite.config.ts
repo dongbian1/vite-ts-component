@@ -10,9 +10,10 @@ export default defineConfig({
     //打包文件目录
     outDir: 'es',
     //压缩
+    emptyOutDir: false,
     minify: true,
     //css分离
-    //cssCodeSplit: true,
+    // cssCodeSplit: false,
     rollupOptions: {
       //忽略打包vue文件
       external: [
@@ -56,13 +57,16 @@ export default defineConfig({
     vue(),
     vueJsx(),
     dts({
-      entryRoot: './src',
-      outputDir: [
+      include: ['index.ts', './src'],
+      cleanVueFileName: true,
+      copyDtsFiles: true,
+      entryRoot: 'src',
+      outDir: [
         resolve(__dirname, './cjx-zdy-ui/es/src'),
         resolve(__dirname, './cjx-zdy-ui/lib/src')
       ],
       //指定使用的tsconfig.json为我们整个项目根目录下掉,如果不配置,你也可以在components下新建tsconfig.json
-      tsConfigFilePath: '../../tsconfig.json'
+      tsconfigPath: resolve(__dirname, '../../tsconfig.json'),
     }),
 
     {

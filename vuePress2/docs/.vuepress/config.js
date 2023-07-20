@@ -60,5 +60,5 @@ module.exports = {
     registerComponentsPlugin({
       componentsDir: path.resolve(__dirname, './components')
     })
-  ]
+  ],
 }

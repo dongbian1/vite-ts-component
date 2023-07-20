@@ -13,6 +13,13 @@
 npm i cjx-zdy-ui
 ```
 
+## 组件引入 main.ts
+```npm
+import CjxUI from 'cjx-zdy-ui'
+
+app.use(CjxUI)
+```
+
 ## 快速开始
 
 ```vue
@@ -41,9 +48,6 @@ npm i cjx-zdy-ui
       >
     </template>
 </ProTable>
-<script lang="ts" setup>
-import { ProTable } from 'cjx-zdy-ui'
-</script>
 ```
 
 ## 图片展示

@@ -1,35 +1,40 @@
 <template>
-  <ProTable
-    ref="proTableRef"
-    :columns="columns"
-    :initParam="{ winRate: 100 }"
-    :tabs="{ data: getTabsList }"
-    rowKey="lotteryActivityAwardId"
-    :children-prop="{
+  <ProTable ref="proTableRef" :columns="columns" :initParam="{ winRate: 100 }" :tabs="{ data: getTabsList }"
+    rowKey="lotteryActivityAwardId" :children-prop="{
       lazy: true,
       load: getChildren
-    }"
-    :span-method="mergeColum"
-    :request-api="getList"
-    :beforeSearchSubmit="formatParams"
-    :dataCallback="formatData"
-  >
+    }" :span-method="mergeColum" :request-api="getList" :beforeSearchSubmit="formatParams" :dataCallback="formatData">
     <template #tableHeader="{ selectedListIds, selectedList, isSelected }">
+      <el-button type="primary" @click="onAdd">新增</el-button>
       <el-button type="primary">导出报表</el-button>
       <el-button type="primary" :disabled="!isSelected">批量删除</el-button>
     </template>
     <template #action="{ row }">
-      <el-button link type="primary"
-        >编辑{{ row.lotteryActivityAwardId }}</el-button
-      >
+      <el-button link type="primary">编辑{{ row.lotteryActivityAwardId }}</el-button>
     </template>
   </ProTable>
+  <ProModal :column="modalColumn" v-model="value" :modal="modalProps" :form="{}" ref="proModalRef" validate
+    @submit="onSubmit">
+    <!-- <template #footer>
+      <div class="dialog-footer" style="text-align: end;">
+        <el-button>Cancel</el-button>
+        <el-button type="primary">
+          Confirm
+        </el-button>
+      </div>
+    </template> -->
+  </ProModal>
 </template>
-<script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
-import { ProTable } from 'cjx-zdy-ui'
+<script lang="tsx" setup>
+import { computed, reactive, ref, watch } from 'vue'
 import { ColumnProps } from 'cjx-zdy-ui/es/src/proTable/types'
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
+import { ProModalInstance } from 'cjx-zdy-ui/es/src/proModal/types';
+import { ProTableInstance } from 'cjx-zdy-ui/lib/src/proTable/types';
+import { DialogProps } from 'element-plus/es/components/dialog';
+import { EnterFormProps } from 'cjx-zdy-ui/lib/src/proModal/types';
+// import { ProModalInstance } from '@/proModal/types';
+// import { ProTableInstance } from '@/proTable/types';
 
 const getTabsList = () => {
   return new Promise((resolve) => {
@@ -169,8 +174,6 @@ const mergeColum = ({
   }
 }
 
-const proTableRef = ref(null)
-
 const columns = computed((): ColumnProps[] => [
   { label: '', prop: 'lotteryActivityAwardId', type: 'selection' },
   { label: '序号', prop: 'lotteryActivityAwardId' },
@@ -251,4 +254,43 @@ const columns = computed((): ColumnProps[] => [
   },
   { label: '操作', prop: 'action' }
 ])
+
+const proTableRef = ref<ProTableInstance>()
+
+const proModalRef = ref<ProModalInstance>()
+
+const modalColumn: EnterFormProps[] = [
+  { label: '奖品名', prop: 'awardName', el: 'input', rules: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }] },
+  {
+    label: '奖品名1', prop: 'awardName1', render: (scope) => {
+      return <el-input modelValue={value.awardName1} placeholder="请输入奖品名1" />
+    },
+  },
+  {
+    label: '奖品名', prop: 'awardName2', el: 'select',
+    enum: [
+      { label: '测试奖品', value: '1' }
+    ],
+    enterProps: {
+      clearable: true
+    },
+    rules: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }]
+  },
+]
+
+const modalProps = reactive<Partial<DialogProps>>({
+  title: '测试Modal'
+})
+
+const value = reactive<{ [k: string]: any }>({
+  awardName: 11111
+})
+
+const onAdd = () => {
+  proModalRef.value?.show({ formData: { awardName: '22222' }, title: '测试0002' })
+}
+
+const onSubmit = (val: boolean) => {
+  console.log(val)
+}
 </script>

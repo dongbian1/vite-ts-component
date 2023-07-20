@@ -27,7 +27,8 @@ module.exports = [
       { text: '动态Modal弹出框', link: '/vue/FlexibleModal' },
       { text: 'Vue 拖拽编辑界面', link: '/vue/DragVue' },
       { text: '批量下载浏览器图片', link: '/vue/DownloadZip' },
-      { text: 'ProTable API', link: '/vue/ProTable' }
+      { text: 'ProTable API', link: '/vue/ProTable' },
+      { text: 'ProModal API', link: '/vue/ProModal' }
     ]
   }
 ]

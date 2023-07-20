@@ -291,20 +291,12 @@ npm i cjx-zdy-ui
 yarn install cjx-zdy-ui
 ```
 
-### 引用
-```vue
-<template>
-  <ProTable />
-</template>
+### 引用 main.ts
+```npm
+import CjxUI from 'cjx-zdy-ui'
 
-<script lang="ts" setup>
-import { ProTable } from 'cjx-zdy-ui'
-
-</script>
+app.use(CjxUI)
 ```
-::: danger 注意
-暂时不支持全局引用
-:::
 
 ### ProTable 属性
 
