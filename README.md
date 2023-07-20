@@ -8,11 +8,11 @@
 ## 图片展示
 ### ProTable
 <br/>
-<img class="avatar" :src="$withBase('./resource/ProTable.png')">
+![ProTable](./resource/ProTable.png)
 
 ### ProModal
 <br/>
-<img class="avatar" :src="$withBase('./resource/ProModal.jpg')">
+![ProModal](./resource/ProModal.png)
 
 ## 安装依赖
 
