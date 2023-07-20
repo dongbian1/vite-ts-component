@@ -8,11 +8,11 @@
 ## 图片展示
 ### ProTable
 <br/>
-![ProTable](./resource/ProTable.png)
+<img class="avatar" src="./resource/ProTable.png">
 
 ### ProModal
 <br/>
-![ProModal](./resource/ProModal.png)
+<img class="avatar" src="./resource/ProModal.jpg">
 
 ## 安装依赖
 
