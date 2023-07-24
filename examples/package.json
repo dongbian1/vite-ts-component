@@ -2,15 +2,27 @@
   "name": "examples",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist-electron/index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite"
+    "dev": "vite --config vite.config.dev.ts",
+    "electron:dev": "cross-env NODE_ENV=development vite --config vite.config.electron.ts",
+    "electron:build": "vite --config vite.config.electron.ts build && electron-builder"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cjx-zdy-ui": "workspace:^"
+    "cjx-zdy-ui": "^1.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^25.3.1",
+    "electron-builder": "^24.4.0",
+    "electron-devtools-installer": "^3.2.0",
+    "rimraf": "^5.0.1",
+    "vite-plugin-electron": "^0.12.0",
+    "vite-plugin-electron-renderer": "^0.14.5"
   }
 }

@@ -1,0 +1,30 @@
+{
+  "appId": "com.electron.desktop",
+  "productName": "自定义组件",
+  "asar": true,
+  "copyright": "Copyright © 2023 electron",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist",
+    "dist-electron"
+  ],
+  "mac": {
+    "artifactName": "${productName}_${version}.${ext}",
+    "target": ["dmg"]
+  },
+  "win": {
+    "target": ["nsis"]
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false,
+    "artifactName": "${productName}_${version}.${ext}"
+  },
+  "releaseInfo": {
+    "releaseNotes": "版本内容敬请期待"
+  }
+}

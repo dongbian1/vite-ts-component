@@ -28,3 +28,6 @@ node_modules
 examples/dist
 **/.cache
 **/.temp
+
+dist*
+release

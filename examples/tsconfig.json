@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "./typings",
+    "rootDir": "./"
+  },
+
+  "include": [
+    "src/**/*.ts",
+    "electron-main/**/*.ts",
+    "electron-preload/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist", "typings"]
+}
