@@ -26,7 +26,7 @@
   </ProModal>
 </template>
 <script lang="tsx" setup>
-import { computed, reactive, ref, watch } from 'vue'
+import { onMounted, computed, reactive, ref, watch } from 'vue'
 import { ColumnProps } from 'cjx-zdy-ui/es/src/proTable/types'
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
 import { ProModalInstance } from 'cjx-zdy-ui/es/src/proModal/types';
@@ -293,4 +293,37 @@ const onAdd = () => {
 const onSubmit = (val: boolean) => {
   console.log(val)
 }
+
+const { ipcRender } = (window as any).electron ?? {}
+
+// 页面上的提示信息
+const text = ref<string>()
+// 当前应用版本信息
+const version = ref<string>()
+// 当前下载进度
+const progress = ref<number>(0)
+
+onMounted(() => {
+  if (ipcRender) {
+    // 给主进程发通知，让主进程告诉我们当前应用的版本是多少
+    ipcRender.send('checkAppVersion');
+    // 接收主进程发来的通知，检测当前应用版本
+    ipcRender.receive("version", (version) => {
+      version.value = version;
+    });
+
+    // 给主进程发通知，检测当前应用是否需要更新
+    ipcRender.send('checkForUpdate');
+    // 接收主进程发来的通知，告诉用户当前应用是否需要更新
+    ipcRender.receive('message', data => {
+      text.value = data;
+    });
+
+    // 如果当前应用有新版本需要下载，则监听主进程发来的下载进度
+    ipcRender.receive('downloadProgress', data => {
+      progress.value = parseInt(data.percent, 10);
+    });
+  }
+})
+
 </script>

@@ -31,3 +31,4 @@ examples/dist
 
 dist*
 release
+examples/build

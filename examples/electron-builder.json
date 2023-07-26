@@ -1,5 +1,5 @@
 {
-  "appId": "com.electron.desktop",
+  "appId": "com.cjxui.app",
   "productName": "自定义组件",
   "asar": true,
   "copyright": "Copyright © 2023 electron",
@@ -15,7 +15,8 @@
     "target": ["dmg"]
   },
   "win": {
-    "target": ["nsis"]
+    "target": ["nsis"],
+    "icon": "./build/icons/icon.ico"
   },
   "nsis": {
     "oneClick": false,
