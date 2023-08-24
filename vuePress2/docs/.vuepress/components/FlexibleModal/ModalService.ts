@@ -2,9 +2,10 @@ import { ComponentOptions, App, h, render, inject } from 'vue'
 
 export const ModalSymbol = Symbol()
 
-export class ModalResult {
-  type: 'ok' | 'cancel' = 'ok'
-  data?: any = undefined
+export class Props {
+  data: { [key: string]: string | number }
+  event: { [key: string]: (e: any) => void }
+  components: Array<any>
 }
 
 export class ModalService {
@@ -14,36 +15,29 @@ export class ModalService {
     this._app = app
   }
 
-  public open(modal: ComponentOptions<any>, props?: any): Promise<ModalResult> {
-    return new Promise((resolve, reject) => {
-      if (!this._app) {
-        reject('app is undefined')
+  private container: HTMLDivElement
+
+  public open(modal: ComponentOptions<any>, props?: Props) {
+    if (!this._app) {
+      throw Error('app is undefined')
+    }
+    this.container = document.createElement('div')
+
+    document.body.appendChild(this.container)
+    const vm = h(modal, {
+      data: props?.data,
+      components: props?.components,
+      ...props?.event,
+      onRemove: () => {
+        this.close()
       }
-
-      const container = document.createElement('div')
-      document.body.appendChild(container)
-
-      const vm = h(modal, {
-        ...props,
-        onOK: (data: any) => {
-          document.body.removeChild(container)
-          resolve(this.setResult('ok', data))
-        },
-        onCancel: () => {
-          document.body.removeChild(container)
-          resolve(this.setResult('cancel'))
-        }
-      })
-      vm.appContext = this._app?._context || null
-      render(vm, container)
     })
+    vm.appContext = this._app?._context || null
+    render(vm, this.container)
   }
 
-  public setResult(type: 'ok' | 'cancel', data?: any): ModalResult {
-    const result = new ModalResult()
-    result.type = type
-    result.data = data
-    return result
+  public close() {
+    document.body.removeChild(this.container)
   }
 }
 

@@ -3,34 +3,49 @@
 </template>
 
 <script setup lang="ts" name="FlexibleModal">
-import { defineAsyncComponent, getCurrentInstance } from 'vue'
+import { defineAsyncComponent, getCurrentInstance, ref } from 'vue'
 import { useModal } from './FlexibleModal/ModalService'
 import com from './FlexibleModal/com.vue'
-// import Modal from './FlexibleModal/Modal.vue'
+import Modal from './FlexibleModal/Modal.vue'
 const { proxy }: any = getCurrentInstance()
 
-const modalAsync = defineAsyncComponent(
-  () => import('./FlexibleModal/Modal.vue')
-)
+// const Modal = defineAsyncComponent(
+//   () => import('./FlexibleModal/Modal.vue')
+// )
 // const com = defineAsyncComponent(() => import('./FlexibleModal/com.vue'))
 const modal = useModal()
 
 const handleOpen = () => {
   proxy.$dyModal
-    .open(modalAsync, {
-      a: 1,
-      confirmText: '测试001',
-      components: [com]
+    .open(Modal, {
+      data: {
+        a: 1,
+        confirmText: '测试001',
+      },
+      components: [com],
+      event: {
+        onOk: (_e) => {
+          console.log(_e)
+        },
+        onCancel: (_e) => {
+          console.log(_e)
+        }
+      }
     })
-    .then((res) => {
-      console.log(res)
-    })
-  // modal.open(modalAsync, {
-  //   a: 1,
-  //   confirmText: '测试001',
-  //   components: [com]
-  // }).then(res => {
-  //   console.log(res)
+  // modal.open(Modal, {
+  //   data: {
+  //     a: 1,
+  //     confirmText: '测试001',
+  //   },
+  //   components: [com],
+  //   event: {
+  //     onOk: (_e) => {
+  //       console.log(_e)
+  //     },
+  //     onCancel: (_e) => {
+  //       console.log(_e)
+  //     }
+  //   }
   // })
 }
 </script>

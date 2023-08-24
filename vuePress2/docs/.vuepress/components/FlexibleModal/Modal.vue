@@ -3,36 +3,35 @@
     <div>这是一段信息</div>
     <component v-for="(item, index) in components" :is="item" :key="index" />
     <template #footer>
-      <el-button @click="close" :loading="loading">取 消</el-button>
-      <el-button type="primary" @click="submit" :loading="loading"
-        >确 定</el-button
-      >
+      <el-button @click="close">取 消</el-button>
+      <el-button type="primary" @click="submit">确 定</el-button>
     </template>
   </el-dialog>
 </template>
 <script setup lang="ts" name="Modal">
-import { ref, VNode } from 'vue'
+import { ref, VNode, watch } from 'vue'
 
-const props = defineProps({
-  a: Number,
-  confirmText: String,
+type Props = {
+  data: { [key: string]: string | number }
   components: Array<VNode>
-})
+}
 
-const emits = defineEmits(['oK', 'cancel'])
+const props = defineProps<Props>()
+
+const emits = defineEmits(['ok', 'cancel', 'remove'])
 
 const visible = ref(true)
-const loading = ref(false)
 
 const handleClose = () => {
-  emits('cancel')
+  emits('remove')
 }
 
 const close = () => {
-  emits('cancel')
+  visible.value = false
+  emits('cancel', { value: '取消' })
 }
 
 const submit = () => {
-  emits('oK', { data: '11111' })
+  emits('ok', { value: '确认' })
 }
 </script>

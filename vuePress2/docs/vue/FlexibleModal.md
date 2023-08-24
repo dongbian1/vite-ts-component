@@ -16,37 +16,36 @@ date: '2022-11-11'
     <div>这是一段信息</div>
     <component v-for="(item, index) in components" :is="item" :key="index" />
     <template #footer>
-      <el-button @click="close" :loading="loading">取 消</el-button>
-      <el-button type="primary" @click="submit" :loading="loading"
-        >确 定</el-button
-      >
+      <el-button @click="close">取 消</el-button>
+      <el-button type="primary" @click="submit">确 定</el-button>
     </template>
   </el-dialog>
 </template>
 <script setup lang="ts" name="Modal">
-import { ref, VNode } from 'vue'
+import { ref, VNode, watch } from 'vue'
 
-const props = defineProps({
-  a: Number,
-  confirmText: String,
+type Props = {
+  data: { [key: string]: string | number }
   components: Array<VNode>
-})
+}
 
-const emits = defineEmits(['oK', 'cancel'])
+const props = defineProps<Props>()
+
+const emits = defineEmits(['ok', 'cancel', 'remove'])
 
 const visible = ref(true)
-const loading = ref(false)
 
 const handleClose = () => {
-  emits('cancel')
+  emits('remove')
 }
 
 const close = () => {
-  emits('cancel')
+  visible.value = false
+  emits('cancel', { value: '取消' })
 }
 
 const submit = () => {
-  emits('oK', { data: '11111' })
+  emits('ok', { value: '确认' })
 }
 </script>
 ```
@@ -58,9 +57,10 @@ import { ComponentOptions, App, h, render, inject } from 'vue'
 
 export const ModalSymbol = Symbol()
 
-export class ModalResult {
-  type: 'ok' | 'cancel' = 'ok'
-  data?: any = undefined
+export class Props {
+  data: { [key: string]: string | number }
+  event: { [key: string]: (e: any) => void }
+  components: Array<any>
 }
 
 export class ModalService {
@@ -70,36 +70,29 @@ export class ModalService {
     this._app = app
   }
 
-  public open(modal: ComponentOptions<any>, props?: any): Promise<ModalResult> {
-    return new Promise((resolve, reject) => {
-      if (!this._app) {
-        reject('app is undefined')
+  private container: HTMLDivElement
+
+  public open(modal: ComponentOptions<any>, props?: Props) {
+    if (!this._app) {
+      throw Error('app is undefined')
+    }
+    this.container = document.createElement('div')
+
+    document.body.appendChild(this.container)
+    const vm = h(modal, {
+      data: props?.data,
+      components: props?.components,
+      ...props?.event,
+      onRemove: () => {
+        this.close()
       }
-
-      const container = document.createElement('div')
-      document.body.appendChild(container)
-
-      const vm = h(modal, {
-        ...props,
-        onOK: (data: any) => {
-          document.body.removeChild(container)
-          resolve(this.setResult('ok', data))
-        },
-        onCancel: () => {
-          document.body.removeChild(container)
-          resolve(this.setResult('cancel'))
-        }
-      })
-      vm.appContext = this._app?._context || null
-      render(vm, container)
     })
+    vm.appContext = this._app?._context || null
+    render(vm, this.container)
   }
 
-  public setResult(type: 'ok' | 'cancel', data?: any): ModalResult {
-    const result = new ModalResult()
-    result.type = type
-    result.data = data
-    return result
+  public close() {
+    document.body.removeChild(this.container)
   }
 }
 
@@ -120,6 +113,7 @@ const plugin = {
 }
 
 export default plugin
+
 ```
 
 ### 挂载 modal
@@ -146,34 +140,49 @@ export default plugin
 </template>
 
 <script setup lang="ts" name="FlexibleModal">
-import { defineAsyncComponent, getCurrentInstance } from 'vue'
+import { defineAsyncComponent, getCurrentInstance, ref } from 'vue'
 import { useModal } from './FlexibleModal/ModalService'
 import com from './FlexibleModal/com.vue'
-// import Modal from './FlexibleModal/Modal.vue'
+import Modal from './FlexibleModal/Modal.vue'
 const { proxy }: any = getCurrentInstance()
 
-const modalAsync = defineAsyncComponent(
-  () => import('./FlexibleModal/Modal.vue')
-)
+// const Modal = defineAsyncComponent(
+//   () => import('./FlexibleModal/Modal.vue')
+// )
 // const com = defineAsyncComponent(() => import('./FlexibleModal/com.vue'))
 const modal = useModal()
 
 const handleOpen = () => {
   proxy.$dyModal
-    .open(modalAsync, {
-      a: 1,
-      confirmText: '测试001',
-      components: [com]
+    .open(Modal, {
+      data: {
+        a: 1,
+        confirmText: '测试001',
+      },
+      components: [com],
+      event: {
+        onOk: (_e) => {
+          console.log(_e)
+        },
+        onCancel: (_e) => {
+          console.log(_e)
+        }
+      }
     })
-    .then((res) => {
-      console.log(res)
-    })
-  // modal.open(modalAsync, {
-  //   a: 1,
-  //   confirmText: '测试001',
-  //   components: [com]
-  // }).then(res => {
-  //   console.log(res)
+  // modal.open(Modal, {
+  //   data: {
+  //     a: 1,
+  //     confirmText: '测试001',
+  //   },
+  //   components: [com],
+  //   event: {
+  //     onOk: (_e) => {
+  //       console.log(_e)
+  //     },
+  //     onCancel: (_e) => {
+  //       console.log(_e)
+  //     }
+  //   }
   // })
 }
 </script>

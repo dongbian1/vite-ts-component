@@ -57,11 +57,6 @@ app.on("window-all-closed", () => {
   }
 });
 
-// 这里是为了在本地做应用升级测试使用
-if (process.env.NODE_ENV === 'development') {
-  autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml');
-}
-
 // 主进程跟渲染进程通信
 const sendUpdateMessage = (text: string) => {
   // 发送消息给渲染进程
@@ -84,7 +79,7 @@ autoUpdater.on('update-available', () => {
     title: '应用有新的更新',
     message: '发现新版本，是否现在更新？',
     buttons: ['是', '否']
-  }).then(({ response }) => {
+  }).then(({ response }) => { 
     if (response === 0) {
       // 下载更新
       autoUpdater.downloadUpdate();
@@ -109,11 +104,11 @@ autoUpdater.on('download-progress', (progress) => {
 autoUpdater.on('update-downloaded', () => {
   // 给用户一个提示，然后重启应用；或者直接重启也可以，只是这样会显得很突兀
   dialog.showMessageBox({
-      title: '安装更新',
-      message: '更新下载完毕，应用将重启并进行安装'
+    title: '安装更新',
+    message: '更新下载完毕，应用将重启并进行安装'
   }).then(() => {
-      // 退出并安装应用
-      setImmediate(() => autoUpdater.quitAndInstall());
+    // 退出并安装应用
+    setImmediate(() => autoUpdater.quitAndInstall());
   });
 });
 
