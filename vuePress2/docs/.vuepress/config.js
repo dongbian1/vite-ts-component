@@ -8,7 +8,7 @@ import { path } from '@vuepress/utils'
 import { copyCodePlugin } from 'vuepress-plugin-copy-code2'
 
 module.exports = {
-  title: '马上升天',
+  title: '码上升天',
   description: '一个不甘平凡又非常平凡的人',
   base: '/vite-ts-component',
   themeConfig: {
