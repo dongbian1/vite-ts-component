@@ -245,9 +245,9 @@ const moduleRendering = (item: ModalFormItem) => {
 return (
   <Modal
     {...modalProps}
-    afterClose={() => {
+    afterClose={modalProps.afterClose || (() => {
       usForm.resetFields()
-    }}
+    })}
     destroyOnClose
     footer={
       modalFooter
@@ -263,7 +263,6 @@ return (
       {...Layout()}
       ref={formRef}
       form={usForm}
-      initialValues={data}
       name="register"
       scrollToFirstError
     >
@@ -441,6 +440,10 @@ export const OperateModal: React.FC<IOperateModal> = ({
         return usForm.getFieldValue(item.name)
       })
   )
+
+  useEffect(() => {
+    usForm.setFieldsValue(data)
+  }, [data])
 
   /**
    * form表单提交
@@ -681,9 +684,9 @@ export const OperateModal: React.FC<IOperateModal> = ({
   return (
     <Modal
       {...modalProps}
-      afterClose={() => {
+      afterClose={modalProps.afterClose || (() => {
         usForm.resetFields()
-      }}
+      })}
       destroyOnClose
       footer={
         modalFooter
@@ -699,7 +702,6 @@ export const OperateModal: React.FC<IOperateModal> = ({
         {...Layout()}
         ref={formRef}
         form={usForm}
-        initialValues={data}
         name="register"
         scrollToFirstError
       >
