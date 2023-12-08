@@ -1,8 +1,9 @@
----
-title: 卡牌抽奖小游戏
-author: 陈佳鑫
-date: '2022-10-28'
----
+<h1 style="text-align: center">卡牌抽奖小游戏</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2022-10-28</div>
+</div>
+<br />
 
 使用 VUE CSS 动画编写卡牌抽奖小游戏
 <TurnOver />

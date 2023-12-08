@@ -1,8 +1,9 @@
----
-title: 批量下载图片
-author: 陈佳鑫
-date: '2023-03-31'
----
+<h1 style="text-align: center">批量下载图片</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2023-03-31</div>
+</div>
+<br />
 
 使用`jszip`压缩图片打包成 ZIP，通过`file-saver`进行浏览器下载
 

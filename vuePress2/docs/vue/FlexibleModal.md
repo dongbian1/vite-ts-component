@@ -1,8 +1,9 @@
----
-title: 动态modal弹出框
-author: 陈佳鑫
-date: '2022-11-11'
----
+<h1 style="text-align: center">动态modal弹出框</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2022-11-11</div>
+</div>
+<br />
 
 使用 document 创建`div`，使用 vue3 提供`h`函数创建 Modal VNode，modal 组件上下文指定在 app.context 上，最后通过`render`函数将组件渲染在创建的 DIV 上，实现动态 modal 创建渲染
 

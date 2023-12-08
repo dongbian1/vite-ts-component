@@ -1,8 +1,9 @@
----
-title: 转盘小游戏
-author: 陈佳鑫
-date: '2022-10-25'
----
+<h1 style="text-align: center">转盘小游戏</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2022-10-25</div>
+</div>
+<br />
 
 使用 VUE CSS 动画编写转盘小游戏
 <Turntable />

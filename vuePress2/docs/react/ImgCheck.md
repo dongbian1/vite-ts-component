@@ -1,8 +1,9 @@
----
-title: React 图片查看器
-author: 陈佳鑫
-date: '2023-5-04'
----
+<h1 style="text-align: center">React 图片查看器</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2023-5-04</div>
+</div>
+<br />
 
 ### 图片查看器
 

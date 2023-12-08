@@ -1,8 +1,9 @@
----
-title: 自定义ModalForm
-author: 陈佳鑫
-date: '2022-10-13'
----
+<h1 style="text-align: center">自定义ModalForm</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2022-10-13</div>
+</div>
+<br />
 
 简单化普通表单模块新增及修改，减少编写 modal 的代码特此组件化
 <br/>

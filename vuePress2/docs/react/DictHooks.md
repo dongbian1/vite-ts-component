@@ -1,8 +1,9 @@
----
-title: 自定义DictHooks
-author: 陈佳鑫
-date: '2023-2-22'
----
+<h1 style="text-align: center">自定义DictHooks</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2023-2-22</div>
+</div>
+<br />
 
 使用 hooks 将大量不频繁更新的字典数据存储在本地，减少服务器压力，在字典产生增、删、改，等操作时，对本地指定字典进行删除，在下次调用
 查询接口时将最新数据存在本地，此方法存在弊端，因无法监听其他用户改变行为所以不能实现及时更新，只能通过用户刷新界面从新获取字典数据，

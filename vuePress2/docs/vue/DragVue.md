@@ -1,8 +1,9 @@
----
-title: 可拖拽编辑页面
-author: 陈佳鑫
-date: '2023-2-13'
----
+<h1 style="text-align: center">可拖拽编辑页面</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2023-2-13</div>
+</div>
+<br />
 
 <DragVue />
 

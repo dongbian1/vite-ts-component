@@ -1,8 +1,9 @@
----
-title: 自定义React Hooks useModal
-author: 陈佳鑫
-date: '2023-2-7'
----
+<h1 style="text-align: center">自定义React Hooks useModal</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2023-2-7</div>
+</div>
+<br />
 
 使用 React Hooks 自定义 use 开发，适用于 modal 弹出框状态管理，减少使用 modal 多参数定义
 

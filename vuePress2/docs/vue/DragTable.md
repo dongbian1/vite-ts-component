@@ -1,8 +1,9 @@
----
-title: 可拖拽排序列表
-author: 陈佳鑫
-date: '2022-10-17'
----
+<h1 style="text-align: center">可拖拽排序列表</h1>
+<div style="display: flex;color: #999;justify-content: space-around;">
+  <div>作者：陈佳鑫</div>
+  <div>时间：2022-10-17</div>
+</div>
+<br />
 
 VUE Element UI Table 组件不支持拖拽排序，特编写完成开发需求，此组件已打包为 UI 组件上传至 NPM
 
