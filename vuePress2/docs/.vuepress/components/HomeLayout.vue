@@ -124,6 +124,21 @@ const state = reactive({
       date: '2023-7-06',
       author: '陈佳鑫',
       explain: '使用 Vite + Vue 3 开发高级表格组件使用说明'
+    },
+    {
+      key: 13,
+      title: 'ProModal API',
+      path: '/vue/ProModal',
+      date: '2023-7-06',
+      author: '陈佳鑫',
+      explain: '使用 Vite + Vue 3 开发Modal+Form表单组件'
+    },{
+      key: 14,
+      title: 'Vite 适配低版本浏览器',
+      path: '/vue/ProModal',
+      date: '2023-12-08',
+      author: '陈佳鑫',
+      explain: '解决vite默认打包为ES6版本不适配谷歌浏览器70版本，导致H5加载白屏问题'
     }
   ]
 })

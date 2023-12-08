@@ -28,7 +28,8 @@ module.exports = [
       { text: 'Vue 拖拽编辑界面', link: '/vue/DragVue' },
       { text: '批量下载浏览器图片', link: '/vue/DownloadZip' },
       { text: 'ProTable API', link: '/vue/ProTable' },
-      { text: 'ProModal API', link: '/vue/ProModal' }
+      { text: 'ProModal API', link: '/vue/ProModal' },
+      { text: 'Vite 适配低版本浏览器', link: '/vue/ViteES5' }
     ]
   }
 ]
