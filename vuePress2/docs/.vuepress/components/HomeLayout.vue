@@ -135,7 +135,7 @@ const state = reactive({
     },{
       key: 14,
       title: 'Vite 适配低版本浏览器',
-      path: '/vue/ProModal',
+      path: '/vue/ViteES5',
       date: '2023-12-08',
       author: '陈佳鑫',
       explain: '解决vite默认打包为ES6版本不适配谷歌浏览器70版本，导致H5加载白屏问题'

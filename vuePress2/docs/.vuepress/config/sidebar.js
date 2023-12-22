@@ -29,7 +29,8 @@ module.exports = [
       { text: '批量下载浏览器图片', link: '/vue/DownloadZip' },
       { text: 'ProTable API', link: '/vue/ProTable' },
       { text: 'ProModal API', link: '/vue/ProModal' },
-      { text: 'Vite 适配低版本浏览器', link: '/vue/ViteES5' }
+      { text: 'Vite 适配低版本浏览器', link: '/vue/ViteES5' },
+      { text: 'Vue 表情雨', link: '/vue/EmojiWaterfall' }
     ]
   }
 ]
