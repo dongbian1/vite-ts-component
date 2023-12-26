@@ -139,6 +139,13 @@ const state = reactive({
       date: '2023-12-08',
       author: '陈佳鑫',
       explain: '解决vite默认打包为ES6版本不适配谷歌浏览器70版本，导致H5加载白屏问题'
+    },{
+      key: 14,
+      title: 'Vue 表情雨',
+      path: '/vue/EmojiWaterfall',
+      date: '2023-12-22',
+      author: '陈佳鑫',
+      explain: '使用createElement创建DIV随机横向坐标从顶点开始掉落，超过3分之一距离后随机触发停止变大效果'
     }
   ]
 })
