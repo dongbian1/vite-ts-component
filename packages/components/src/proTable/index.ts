@@ -1,5 +1,5 @@
 import proTable from './proTable.vue'
-import { withInstall } from '@npm_cjx/utils'
+import { withInstall } from '@utils/index'
 
 const ProTable = withInstall(proTable)
 export default ProTable

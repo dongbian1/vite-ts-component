@@ -1,7 +1,7 @@
 {
   "name": "cjx-zdy-ui",
-  "version": "1.2.0",
-  "description": "",
+  "version": "1.3.0",
+  "description": "修改为可以直接饮用版本",
   "main": "lib/index.js",
   "module": "es/index.mjs",
   "files": [

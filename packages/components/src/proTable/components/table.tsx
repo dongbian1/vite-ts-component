@@ -5,7 +5,7 @@ import {
   formatValue,
   handleProp,
   handleRowAccordingToProp
-} from '@npm_cjx/utils'
+} from '@utils/index'
 
 const RenderTableColumn = (
   item: ColumnProps,

@@ -20,6 +20,7 @@ export default defineConfig({
         'vue',
         /\.less/,
         '@npm_cjx/utils',
+        'node_modules',
         'element-plus',
         '@element-plus/icons-vue'
       ],
@@ -57,7 +58,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     dts({
-      include: ['index.ts', './src'],
+      include: ['./index.ts', './src'],
       cleanVueFileName: true,
       copyDtsFiles: true,
       entryRoot: 'src',
@@ -66,7 +67,7 @@ export default defineConfig({
         resolve(__dirname, './cjx-zdy-ui/lib/src')
       ],
       //指定使用的tsconfig.json为我们整个项目根目录下掉,如果不配置,你也可以在components下新建tsconfig.json
-      tsconfigPath: resolve(__dirname, '../../tsconfig.json'),
+      tsconfigPath: resolve(__dirname, '../../tsconfig.json')
     }),
 
     {
@@ -90,7 +91,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
+      '@': resolve(__dirname, 'src'),
+      '@utils': resolve(__dirname, 't-utils'),
+      '@withInstall': resolve(__dirname, 'withinstall')
     }
   }
 })

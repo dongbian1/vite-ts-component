@@ -1,9 +1,10 @@
 <template>
+  <!-- @ts-ignore -->
   <component
     :style="{ width: '100%' }"
     :is="column.search?.render ?? `el-${column.search?.el}`"
     v-bind="{ ...handleSearchProps, ...placeholder, searchParam, clearable }"
-    v-model.trim="searchParam[column.search?.key ?? handleProp(column.prop!)]"
+    v-model.trim="searchParam"
     :data="column.search?.el === 'tree-select' ? columnEnum : []"
     :options="['cascader', 'select-v2'].includes(column.search?.el!) ? columnEnum : []"
   >
@@ -25,7 +26,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
-import { handleProp } from '@npm_cjx/utils'
+import { handleProp } from '@utils/index'
 import { ColumnProps } from '@/proTable/types'
 
 defineOptions({
@@ -37,6 +38,13 @@ interface SearchFormItem {
   searchParam: { [key: string]: any }
 }
 const props = defineProps<SearchFormItem>()
+
+const searchParam = computed(
+  () =>
+    props.searchParam[
+      props.column.search?.key ?? handleProp(props.column.prop!)
+    ]
+)
 
 // 判断 fieldNames 设置 label && value && children 的 key 值
 const fieldNames = computed(() => {

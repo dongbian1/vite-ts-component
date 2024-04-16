@@ -14,6 +14,6 @@
   "license": "MIT",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@npm_cjx/utils": "^1.1.5"
+    "@npm_cjx/utils": "workspace:^"
   }
 }

@@ -26,13 +26,11 @@
   </ProModal>
 </template>
 <script lang="tsx" setup>
-import { onMounted, computed, reactive, ref, watch } from 'vue'
-import { ColumnProps } from 'cjx-zdy-ui/es/src/proTable/types'
+import { onMounted, computed, reactive, ref } from 'vue'
+import { ColumnProps, ProTableInstance } from 'cjx-zdy-ui/es/src/proTable/types'
+import { EnterFormProps, ProModalInstance } from 'cjx-zdy-ui/lib/src/proModal/types';
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
-import { ProModalInstance } from 'cjx-zdy-ui/es/src/proModal/types';
-import { ProTableInstance } from 'cjx-zdy-ui/lib/src/proTable/types';
 import { DialogProps } from 'element-plus/es/components/dialog';
-import { EnterFormProps } from 'cjx-zdy-ui/lib/src/proModal/types';
 // import { ProModalInstance } from '@/proModal/types';
 // import { ProTableInstance } from '@/proTable/types';
 
@@ -262,7 +260,7 @@ const proModalRef = ref<ProModalInstance>()
 const modalColumn: EnterFormProps[] = [
   { label: '奖品名', prop: 'awardName', el: 'input', rules: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }] },
   {
-    label: '奖品名1', prop: 'awardName1', render: (scope) => {
+    label: '奖品名1', prop: 'awardName1', render: (_scope: any) => {
       return <el-input modelValue={value.awardName1} placeholder="请输入奖品名1" />
     },
   },
@@ -308,19 +306,19 @@ onMounted(() => {
     // 给主进程发通知，让主进程告诉我们当前应用的版本是多少
     ipcRender.send('checkAppVersion');
     // 接收主进程发来的通知，检测当前应用版本
-    ipcRender.receive("version", (version) => {
+    ipcRender.receive("version", (version: any) => {
       version.value = version;
     });
 
     // 给主进程发通知，检测当前应用是否需要更新
     ipcRender.send('checkForUpdate');
     // 接收主进程发来的通知，告诉用户当前应用是否需要更新
-    ipcRender.receive('message', data => {
+    ipcRender.receive('message', (data: any) => {
       text.value = data;
     });
 
     // 如果当前应用有新版本需要下载，则监听主进程发来的下载进度
-    ipcRender.receive('downloadProgress', data => {
+    ipcRender.receive('downloadProgress', (data: any) => {
       progress.value = parseInt(data.percent, 10);
     });
   }
