@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@npm_cjx/utils": "workspace:^",
     "cjx-zdy-ui": "workspace:^",
     "electron-updater": "^6.1.1"
   },

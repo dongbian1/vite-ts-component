@@ -19,7 +19,6 @@ export default defineConfig({
       external: [
         'vue',
         /\.less/,
-        '@npm_cjx/utils',
         'node_modules',
         'element-plus',
         '@element-plus/icons-vue'

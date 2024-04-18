@@ -16,11 +16,5 @@
   ],
   "author": "cjx",
   "license": "MIT",
-  "typings": "lib/index.d.ts",
-  "dependencies": {
-    "@npm_cjx/utils": "^1.1.5"
-  },
-  "devDependencies": {
-    "@types/node": "^20.3.0"
-  }
+  "typings": "lib/index.d.ts"
 }

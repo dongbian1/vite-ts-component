@@ -107,9 +107,6 @@ importers:
 
   examples:
     dependencies:
-      '@npm_cjx/utils':
-        specifier: workspace:^
-        version: link:../packages/utils
       cjx-zdy-ui:
         specifier: workspace:^
         version: link:../packages/components/cjx-zdy-ui
@@ -142,21 +139,9 @@ importers:
         specifier: ^0.14.5
         version: 0.14.5
 
-  packages/components:
-    dependencies:
-      '@npm_cjx/utils':
-        specifier: workspace:^
-        version: link:../utils
+  packages/components: {}
 
-  packages/components/cjx-zdy-ui:
-    dependencies:
-      '@npm_cjx/utils':
-        specifier: ^1.1.5
-        version: link:../../utils
-    devDependencies:
-      '@types/node':
-        specifier: ^20.3.0
-        version: 20.3.0
+  packages/components/cjx-zdy-ui: {}
 
   packages/utils: {}
 
