@@ -340,7 +340,7 @@ ColumnProps 继承了TableColumnCtx 此处只写明额外属性，请结合eleme
 ### TabsProps 属性
 | 属性名     |说明          | 类型 | 必传 | 可选值 | 默认值 |
 | :-------- | :----------- | :------------- | :------------- | :------------- |:------------- |
-| data | tabs渲染数据 | `Array<{ label: string; name: string  number }>` `() => Promise<any>` | true | - | - |
+| data | tabs渲染数据 | `Array<{ label: string; name: string  number }>` `() => Promise<{ data: Array<any> }>` | true | - | - |
 | tabsKey | 查询主键，如未传入该字段，字段为status | `string` | false | - | `status` |
 | option | 字典类型keyName，未传入取值 label name | `{ labelKey: string; nameKey: string }` | false | - | `{ labelKey: label; nameKey: name }` |
 
@@ -361,6 +361,7 @@ ColumnProps 继承了TableColumnCtx 此处只写明额外属性，请结合eleme
 | span | 搜索项所占用的列数，默认为1列 | `number` | false | - | 1 |
 | offset | 搜索字段左侧偏移列数 | `number` | false | - | - |
 | defaultValue | 搜索项默认值 | `string` `number` `boolean` `any[]`| false | - | - |
+| render | 自定义搜索框内容渲染（tsx语法）| `(scope: RenderScope<T>) => VNode  string` | false | - | - |
 
 ### EnumProps 属性
 | 属性名     |说明          | 类型 | 必传 | 可选值 | 默认值 |
