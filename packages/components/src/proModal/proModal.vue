@@ -9,7 +9,13 @@
       status-icon
       v-bind="{ ...props.form, model: props.modelValue }"
     >
-      <el-form-item v-for="column in enterColumn" :key="column.prop" :label="column.label" :prop="column.prop" :rules="column.rules">
+      <el-form-item
+        v-for="column in enterColumn"
+        :key="column.prop"
+        :label="column.label"
+        :prop="column.prop"
+        :rules="column.rules"
+      >
         <FormItem :column="column" :enter-param="props.modelValue" />
       </el-form-item>
     </el-form>
@@ -17,34 +23,17 @@
     <template v-if="!isFooter" #footer>
       <span class="dialog-footer">
         <el-button @click="hideDialog">取 消</el-button>
-        <el-button type="primary" @click="onSubmit">
-          确 定
-        </el-button>
+        <el-button type="primary" @click="onSubmit"> 确 定 </el-button>
       </span>
     </template>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { provide, ref, useSlots, reactive } from 'vue';
-import { EnterFormProps } from './types';
-import { DialogProps } from "element-plus/es/components/dialog"
-import { FormInstance, FormProps } from "element-plus/es/components/form"
+import { provide, ref, useSlots, reactive } from 'vue'
+import { EnterFormProps, ModalProps, OpenDialog } from './types'
+import { FormInstance } from 'element-plus/es/components/form'
 import FormItem from './components/formItem.vue'
-
-export interface ModalProps {
-  modelValue?: { [k: string]: any} // 双向数据绑定
-  column: EnterFormProps[]   // 输入项配置  ==> 必传
-  validate?: boolean              // 是否由组件validate验证 默认true, 如果传入插槽footer则需要自验证
-  modal?: Partial<DialogProps>   // Dialog 属性，根据 element plus 官方文档来传递
-  form?: Partial<FormProps>      // Form 属性，根据 element plus 官方文档来传递
-}
-
-export interface OpenDialog {
-  title?: string      // 标题
-  formData?: { [k: string]: any }    // 默认数据
-  type?: string       // 类型标识
-}
 
 const visible = ref(false)
 
@@ -65,7 +54,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
 // form表单默认Ref属性
 const formRef = ref<FormInstance>()
 
-const slots =  useSlots()
+const slots = useSlots()
 // 是否从上级传递了footer 底部按钮，有就使用上级传递，无则使用组件中定义底部按钮，并且调用submit事件
 const isFooter = Object.keys(slots).includes('footer')
 
@@ -82,7 +71,7 @@ const setEnumMap = async (col: EnterFormProps) => {
 }
 
 // 设置enum字典,增加默认值
-const enterColumn = props.column.map(col => {
+const enterColumn = props.column.map((col) => {
   if (col.enum) {
     setEnumMap(col)
   }
@@ -90,19 +79,21 @@ const enterColumn = props.column.map(col => {
   return col
 })
 
-
 let modalOptics = reactive<OpenDialog>({})
 
 /**
  * 打开Dialog框
- * @param event 
+ * @param event
  */
 const openDialog = (event?: OpenDialog) => {
   visible.value = true
   if (event) {
     modalOptics = event
     if (event.formData) {
-      emits('update:modalValue', Object.assign(props.modelValue, event.formData))
+      emits(
+        'update:modalValue',
+        Object.assign(props.modelValue, event.formData)
+      )
     }
     if (event.title) {
       emits('update:modal', Object.assign(props.modal, { title: event.title }))
@@ -138,5 +129,4 @@ defineExpose({
   hide: hideDialog,
   formRef: formRef
 })
-
 </script>

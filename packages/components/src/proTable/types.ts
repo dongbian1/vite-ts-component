@@ -1,8 +1,58 @@
 import { ComponentPublicInstance, VNode } from 'vue'
 import { BreakPoint, Responsive } from '@/grid/types'
-import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
+import { TableColumnCtx } from 'element-plus'
 import ProTable from '.'
-import { ProTableProps } from './proTable.vue'
+
+export interface SpanMethod {
+  functionReturn: {
+    rowspan: number
+    colspan: number
+  }
+  functionData: {
+    row: any
+    rowIndex: number
+    column: TableColumnCtx<any>
+    columnIndex: number
+  }
+  functionType?: (
+    data: SpanMethod['functionData']
+  ) => number[] | SpanMethod['functionReturn']
+}
+
+export interface ProTableProps {
+  columns: ColumnProps[] // 列配置项  ==> 必传
+  data?: any[] // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
+  requestApi?: (params: any) => Promise<any> // 请求表格数据的 api ==> 非必传
+  requestAuto?: boolean // 是否自动执行请求 api ==> 非必传（默认为true）
+  requestError?: (params: any) => void // 表格 api 请求错误监听 ==> 非必传
+  beforeSearchSubmit?: (params: any) => object // api 请求参数格式化 ==> 非必传
+  dataCallback?: (data: any) => any // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
+  pagination?: boolean // 是否需要分页组件 ==> 非必传（默认为true）
+  initParam?: any // 初始化请求参数 ==> 非必传（默认为{}）
+  border?: boolean // 是否带有纵向边框 ==> 非必传（默认为true）
+  toolButton?: boolean // 是否显示表格功能按钮 ==> 非必传（默认为true）
+  rowKey?: string // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ==> 非必传（默认为 id）
+  searchCol?: number | Record<BreakPoint, number> // 表格搜索项 每列占比配置 ==> 非必传 { xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }
+  // 表格头部tabs切换
+  tabs?: {
+    data: Array<{ label: string; name: string | number }> | (() => Promise<any>) // tabs渲染数据
+    tabsKey?: string // 查询主键，如未传入该字段，字段为status
+    option?: { labelKey: string; nameKey: string } // 字典类型keyName，未传入取值 label name
+  }
+  // 树形数据属性
+  childrenProp?: {
+    lazy?: boolean // 是否懒加载子节点数据
+    // 加载子节点数据的函数，lazy 为 true 时生效
+    load?: (row: any, treeNode: unknown, resolve: (data: any[]) => void) => void
+    // 渲染嵌套数据的配置选项
+    treeProps?: {
+      children: string // 视为树形数据
+      hasChildren: string // 指定哪些行是包含子节点
+    }
+  }
+  // 合并单元格
+  spanMethod?: SpanMethod['functionType']
+}
 
 export interface EnumProps {
   label: string // 选项框显示的文字
@@ -81,4 +131,7 @@ export interface ColumnProps<T = any>
   _children?: ColumnProps<T>[] // 多级表头
 }
 
-export type ProTableInstance = Omit<InstanceType<typeof ProTable>, keyof ComponentPublicInstance | keyof ProTableProps>;
+export type ProTableInstance = Omit<
+  InstanceType<typeof ProTable>,
+  keyof ComponentPublicInstance | keyof ProTableProps
+>

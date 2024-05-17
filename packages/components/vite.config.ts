@@ -57,18 +57,17 @@ export default defineConfig({
     vue(),
     vueJsx(),
     dts({
-      include: ['./index.ts', './src'],
+      include: ['./index.ts', './src', './t-utils'],
       cleanVueFileName: true,
       copyDtsFiles: true,
-      entryRoot: 'src',
+      entryRoot: './',
       outDir: [
-        resolve(__dirname, './cjx-zdy-ui/es/src'),
-        resolve(__dirname, './cjx-zdy-ui/lib/src')
+        resolve(__dirname, './cjx-zdy-ui/es/'),
+        resolve(__dirname, './cjx-zdy-ui/lib/')
       ],
       //指定使用的tsconfig.json为我们整个项目根目录下掉,如果不配置,你也可以在components下新建tsconfig.json
       tsconfigPath: resolve(__dirname, '../../tsconfig.json')
     }),
-
     {
       name: 'style',
       generateBundle(config, bundle) {
