@@ -28,7 +28,7 @@
 <script lang="tsx" setup>
 import { onMounted, computed, reactive, ref } from 'vue'
 import { ColumnProps, ProTableInstance } from 'cjx-zdy-ui/es/src/proTable/types'
-import { EnterFormProps, ProModalInstance } from 'cjx-zdy-ui/lib/src/proModal/types';
+import { EnterFormProps, ProModalInstance } from 'cjx-zdy-ui/es/src/proModal/types';
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
 import { DialogProps } from 'element-plus/es/components/dialog';
 // import { ProModalInstance } from '@/proModal/types';
