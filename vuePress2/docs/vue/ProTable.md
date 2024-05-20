@@ -378,3 +378,17 @@ ColumnProps 继承了TableColumnCtx 此处只写明额外属性，请结合eleme
 | label | 选项框显示的文字 | `string` | true | - | - |
 | value | 选项框值 | `string` | true | - | - |
 | children | 选项框子选项 | `string` | false | - | - |
+
+### ProTable 导出属性 ###
+| 属性名     |说明          | 类型 |
+| :-------- | :----------- | :------------- |
+| tableData | 当前表单展示数据 | `any[]` |
+| searchParam | 所有的搜索参数，不包含分页 | `object` |
+| pageable | 当前表格的分页数据 | `object` |
+| enumMap | 当前表格使用的所有字典数据（Map 数据结构）| `Map` |
+| isSelected | 表格是否选中数据 | `boolean` |
+| selectedList | 表格选中的数据列表 | `Array` |
+| selectedListIds | 表格选中的数据列表的 id | `Array` |
+| getTableList | 刷新表格数据的方法 | `Function` |
+| reset | 重置表格查询参数，相当于点击重置按钮 | `Function` |
+| clearSelection | 清空选中数据列表 | `Function` |

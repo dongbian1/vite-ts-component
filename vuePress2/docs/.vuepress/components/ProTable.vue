@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
 import { ProTable } from 'cjx-zdy-ui'
-import { ColumnProps } from 'cjx-zdy-ui/es/src/proTable/types'
+import { ColumnProps, ProTableInstance } from 'cjx-zdy-ui/es/src/proTable/types'
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
 
 const getTabsList = () => {
@@ -169,7 +169,7 @@ const mergeColum = ({
   }
 }
 
-const proTableRef = ref(null)
+const proTableRef = ref<ProTableInstance>()
 
 const columns = computed((): ColumnProps[] => [
   { label: '', prop: 'lotteryActivityAwardId', type: 'selection' },

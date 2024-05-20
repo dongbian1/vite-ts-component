@@ -147,3 +147,17 @@ app.use(CjxUI)
 | 事件名 | 说明 | 参数 |
 |:--------| :------| :------|
 | submit | 确定按钮触发事件如果使用`footer`插槽将不会触发| form 表单数据 |
+
+### ProModal 导出属性 ###
+| 属性名     |说明          | 类型 |
+| :-------- | :----------- | :------------- |
+| formRef | from表单ref属性，根据 element plus 官方文档来使用 | - |
+| show | 打开modal框 | <a href="#opendialog-属性">`Function`</a>，如果Function未传递参数将使用`ProModal`中设置参数  |
+| hide | 关闭modal框 | `Function` |
+
+### OpenDialog 属性
+| 属性名     |说明          | 类型 | 必传 | 可选值 | 默认值 |
+| :-------- | :----------- | :------------- | :------------- | :------------- |:------------- |
+| title | 标题 | `string` | false | - | - |
+| formData | 默认数据 | `{ [k: string]: any }` | false | - | - |
+| type | 标识，用来区分`update`、`add`及其其他方法 | `string` | false | - | - |

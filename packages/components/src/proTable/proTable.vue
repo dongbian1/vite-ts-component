@@ -302,12 +302,6 @@ defineExpose({
   searchParam,
   // 当前表格的分页数据
   pageable,
-  // 获取、刷新表格数据的方法
-  getTableList,
-  // 重置表格查询参数，相当于点击重置按钮
-  reset,
-  // 清空选中数据列表
-  clearSelection,
   // 当前表格使用的所有字典数据（Map 数据结构）
   enumMap,
   // 表格是否选中数据
@@ -315,7 +309,13 @@ defineExpose({
   // 表格选中的数据列表
   selectedList,
   // 表格选中的数据列表的 id
-  selectedListIds
+  selectedListIds,
+  // 刷新表格数据的方法
+  getTableList,
+  // 重置表格查询参数，相当于点击重置按钮
+  reset,
+  // 清空选中数据列表
+  clearSelection
   // tableElement: tableRef
 })
 </script>
