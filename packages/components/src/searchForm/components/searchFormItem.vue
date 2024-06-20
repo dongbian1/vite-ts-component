@@ -4,7 +4,7 @@
     :style="{ width: '100%' }"
     :is="column.search?.render ?? `el-${column.search?.el}`"
     v-bind="{ ...handleSearchProps, ...placeholder, searchParam, clearable }"
-    v-model.trim="searchParam"
+    v-model.trim="searchParam[column.search?.key ?? handleProp(props.column.prop!)]"
     :data="column.search?.el === 'tree-select' ? columnEnum : []"
     :options="['cascader', 'select-v2'].includes(column.search?.el!) ? columnEnum : []"
   >
@@ -38,13 +38,6 @@ interface SearchFormItem {
   searchParam: { [key: string]: any }
 }
 const props = defineProps<SearchFormItem>()
-
-const searchParam = computed(
-  () =>
-    props.searchParam[
-      props.column.search?.key ?? handleProp(props.column.prop!)
-    ]
-)
 
 // 判断 fieldNames 设置 label && value && children 的 key 值
 const fieldNames = computed(() => {
@@ -118,6 +111,7 @@ const placeholder = computed(() => {
 
 // 是否有清除按钮 (当搜索项有默认值时，清除按钮不显示)
 const clearable = computed(() => {
+  console.log(111)
   const search = props.column.search
   return (
     search?.props?.clearable ??
