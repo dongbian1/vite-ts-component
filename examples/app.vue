@@ -10,7 +10,7 @@
       <el-button type="primary" :disabled="!isSelected">批量删除</el-button>
     </template>
     <template #action="{ row }">
-      <el-button link type="primary">编辑{{ row.lotteryActivityAwardId }}</el-button>
+      <el-button link type="primary" @click="onUpdate(row)">编辑{{ row.lotteryActivityAwardId }}</el-button>
     </template>
   </ProTable>
   <ProModal :column="modalColumn" v-model="value" :modal="modalProps" :form="{}" ref="proModalRef" validate
@@ -49,7 +49,7 @@ const getTabsList = () => {
 
 const formatParams = (params: any) => {
   console.log(params)
-  return { ...params, 1: 1 }
+  return { current: params.pageNum, size: params.pageSize, 1: 1 }
 }
 
 const formatData = (data: any) => {
@@ -281,12 +281,16 @@ const modalProps = reactive<Partial<DialogProps>>({
 })
 
 const value = reactive<{ [k: string]: any }>({
-  awardName: 11111
+  awardName1: 1
 })
 
 const onAdd = () => {
   proModalRef.value?.show({ formData: { awardName: '22222' }, title: '测试0002' })
 }
+
+const onUpdate = (row: any) => {
+	proModalRef.value?.show({ formData: { ...row }, title: '修改' });
+};
 
 const onSubmit = (val: boolean) => {
   console.log(val)

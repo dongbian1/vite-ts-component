@@ -1,5 +1,5 @@
 <template>
-   <component
+  <component
     :style="{ width: '100%' }"
     :is="column.render ?? `el-${column.el}`"
     v-bind="{ ...handleEnterProps, ...placeholder, enterParam }"
@@ -21,11 +21,10 @@
     </template>
     <slot v-else></slot>
   </component>
-
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue';
+import { computed, inject, ref } from 'vue'
 import { EnterFormProps } from '../types'
 
 defineOptions({
@@ -94,9 +93,7 @@ const handleEnterProps = computed(() => {
 const placeholder = computed(() => {
   const enter = props.column.enterProps
   if (
-    ['datetimerange', 'daterange', 'monthrange'].includes(
-      enter?.type
-    ) ||
+    ['datetimerange', 'daterange', 'monthrange'].includes(enter?.type) ||
     enter?.isRange
   ) {
     return {
@@ -106,9 +103,9 @@ const placeholder = computed(() => {
     }
   }
   const placeholder =
-  enter?.placeholder ??
-    (props?.column.el?.includes('input') ? '请输入' : '请选择') + props.column.label
+    enter?.placeholder ??
+    (props?.column.el?.includes('input') ? '请输入' : '请选择') +
+      props.column.label
   return { placeholder }
 })
-
 </script>

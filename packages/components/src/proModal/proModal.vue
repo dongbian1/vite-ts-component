@@ -90,13 +90,10 @@ const openDialog = (event?: OpenDialog) => {
   if (event) {
     modalOptics = event
     if (event.formData) {
-      emits(
-        'update:modalValue',
-        Object.assign(props.modelValue, event.formData)
-      )
+      emits('update:modalValue', { ...props.modelValue, ...event.formData })
     }
     if (event.title) {
-      emits('update:modal', Object.assign(props.modal, { title: event.title }))
+      emits('update:modal', { ...props.modal, title: event.title })
     }
   }
 }
