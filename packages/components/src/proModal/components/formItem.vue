@@ -10,14 +10,17 @@
     <template #default="{ data }" v-if="column.el === 'cascader'">
       <span>{{ data[fieldNames.label] }}</span>
     </template>
-    <template v-if="column?.el === 'select'">
+    <template
+      v-if="column?.el && ['radio-group', 'select'].includes(column?.el)"
+    >
       <component
-        :is="`el-option`"
+        :is="`el-${{ 'radio-group': 'radio', select: 'option' }[column?.el]}`"
         v-for="(col, index) in columnEnum"
         :key="index"
         :label="col[fieldNames.label]"
         :value="col[fieldNames.value]"
-      />
+        >{{ col[fieldNames.label] }}</component
+      >
     </template>
     <slot v-else></slot>
   </component>

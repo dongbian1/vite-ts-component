@@ -54,7 +54,7 @@
         v-model="tabsVal"
         type="card"
         class="demo-tabs"
-        @tab-click="getTableList"
+        @tab-change="getTableList"
       >
         <el-tab-pane label="全部" name="all" />
         <el-tab-pane

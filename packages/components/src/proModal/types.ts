@@ -44,7 +44,7 @@ export type EnterType =
   | 'time-select'
   | 'switch'
   | 'slider'
-  | 'radio'
+  | 'radio-group'
   | 'checkbox'
   | 'upload'
   | 'rate'

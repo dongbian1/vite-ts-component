@@ -111,7 +111,6 @@ const placeholder = computed(() => {
 
 // 是否有清除按钮 (当搜索项有默认值时，清除按钮不显示)
 const clearable = computed(() => {
-  console.log(111)
   const search = props.column.search
   return (
     search?.props?.clearable ??
