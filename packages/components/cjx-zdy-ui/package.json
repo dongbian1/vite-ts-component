@@ -1,6 +1,6 @@
 {
   "name": "cjx-zdy-ui",
-  "version": "1.3.4",
+  "version": "1.3.7",
   "description": "基于element-plus二次封装的组件库",
   "main": "lib/index.js",
   "module": "es/index.mjs",
