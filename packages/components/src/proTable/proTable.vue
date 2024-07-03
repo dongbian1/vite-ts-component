@@ -298,6 +298,8 @@ const colSetting = tableColumns.value!.filter(
 defineExpose({
   // 当前页面所展示的数据
   tableData,
+  // tabs选中
+  tabsVal,
   // 所有的搜索参数，不包含分页
   searchParam,
   // 当前表格的分页数据

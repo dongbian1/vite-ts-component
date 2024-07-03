@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="visible" v-bind="{ ...props.modal }">
+  <el-dialog v-model="visible" v-bind="{ close: onClose, ...props.modal }">
     <slot name="header"></slot>
     <slot name="title"></slot>
     <el-form
@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { provide, ref, useSlots, reactive } from 'vue'
+import { provide, ref, useSlots, reactive, watchEffect } from 'vue'
 import { EnterFormProps, ModalProps, OpenDialog } from './types'
 import { FormInstance } from 'element-plus/es/components/form'
 import FormItem from './components/formItem.vue'
@@ -70,13 +70,17 @@ const setEnumMap = async (col: EnterFormProps) => {
   enumMap.value.set(col.prop!, data)
 }
 
-// 设置enum字典,增加默认值
-const enterColumn = props.column.map((col) => {
-  if (col.enum) {
-    setEnumMap(col)
-  }
-  if (!col.el) col.el = 'input'
-  return col
+// 增加默认值
+const enterColumn = ref<EnterFormProps[]>()
+
+watchEffect(() => {
+  enterColumn.value = props.column.map((col) => {
+    if (col.enum) {
+      setEnumMap(col)
+    }
+    if (!col.el) col.el = 'input'
+    return col
+  })
 })
 
 let modalOptics = reactive<OpenDialog>({})
@@ -99,6 +103,10 @@ const openDialog = (event?: OpenDialog) => {
       emits('update:modal', Object.assign(props.modal, { title: event.title }))
     }
   }
+}
+
+const onClose = () => {
+  emits('update:modalValue', {})
 }
 
 /**
