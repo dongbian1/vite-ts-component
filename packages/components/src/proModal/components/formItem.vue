@@ -3,7 +3,7 @@
     :style="{ width: '100%' }"
     :is="column.render ?? `el-${column.el}`"
     v-bind="{ ...handleEnterProps, ...placeholder, enterParam }"
-    v-model.trim="enterParam[column.prop]"
+    v-model="enterParam[column.prop]"
     :data="column.el === 'tree-select' ? columnEnum : []"
     :options="['cascader', 'select-v2'].includes(column.el!) ? columnEnum : []"
   >
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { EnterFormProps } from '../types'
 
 defineOptions({

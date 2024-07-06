@@ -1,20 +1,39 @@
 <template>
-  <ProTable ref="proTableRef" :columns="columns" :initParam="{ winRate: 100 }" :tabs="{ data: getTabsList }"
-    rowKey="lotteryActivityAwardId" :children-prop="{
+  <ProTable
+    ref="proTableRef"
+    :columns="columns"
+    :initParam="{ winRate: 100 }"
+    :tabs="{ data: getTabsList }"
+    rowKey="lotteryActivityAwardId"
+    :children-prop="{
       lazy: true,
       load: getChildren
-    }" :span-method="mergeColum" :request-api="getList" :beforeSearchSubmit="formatParams" :dataCallback="formatData">
+    }"
+    :span-method="mergeColum"
+    :request-api="getList"
+    :beforeSearchSubmit="formatParams"
+    :dataCallback="formatData"
+  >
     <template #tableHeader="{ selectedListIds, selectedList, isSelected }">
       <el-button type="primary" @click="onAdd">新增</el-button>
       <el-button type="primary">导出报表</el-button>
       <el-button type="primary" :disabled="!isSelected">批量删除</el-button>
     </template>
     <template #action="{ row }">
-      <el-button link type="primary" @click="onUpdate(row)">编辑{{ row.lotteryActivityAwardId }}</el-button>
+      <el-button link type="primary" @click="onUpdate(row)"
+        >编辑{{ row.lotteryActivityAwardId }}</el-button
+      >
     </template>
   </ProTable>
-  <ProModal :column="modalColumn" v-model="value" :modal="modalProps" :form="{}" ref="proModalRef" validate
-    @submit="onSubmit">
+  <ProModal
+    :column="modalColumn"
+    v-model="value"
+    :modal="modalProps"
+    :form="{}"
+    ref="proModalRef"
+    validate
+    @submit="onSubmit"
+  >
     <!-- <template #footer>
       <div class="dialog-footer" style="text-align: end;">
         <el-button>Cancel</el-button>
@@ -26,11 +45,14 @@
   </ProModal>
 </template>
 <script lang="tsx" setup>
-import { onMounted, computed, reactive, ref } from 'vue'
+import { onMounted, computed, reactive, ref, watch } from 'vue'
 import { ColumnProps, ProTableInstance } from 'cjx-zdy-ui/es/src/proTable/types'
-import { EnterFormProps, ProModalInstance } from 'cjx-zdy-ui/es/src/proModal/types';
+import {
+  EnterFormProps,
+  ProModalInstance
+} from 'cjx-zdy-ui/es/src/proModal/types'
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
-import { DialogProps } from 'element-plus/es/components/dialog';
+import { DialogProps } from 'element-plus/es/components/dialog'
 // import { ProModalInstance } from '@/proModal/types';
 // import { ProTableInstance } from '@/proTable/types';
 
@@ -257,40 +279,79 @@ const proTableRef = ref<ProTableInstance>()
 
 const proModalRef = ref<ProModalInstance>()
 
-const modalColumn: EnterFormProps[] = [
-  { label: '奖品名', prop: 'awardName', el: 'input', rules: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }] },
-  {
-    label: '奖品名1', prop: 'awardName1', render: (_scope: any) => {
-      return <el-input modelValue={value.awardName1} placeholder="请输入奖品名1" />
+const modalColumn = computed((): EnterFormProps[] => {
+  const newColumn: EnterFormProps[] = [
+    {
+      label: '奖品名',
+      prop: 'awardName',
+      el: 'input',
+      rules: [
+        {
+          required: true,
+          message: 'Please input Activity name',
+          trigger: 'blur'
+        }
+      ]
     },
-  },
-  {
-    label: '奖品名', prop: 'awardName2', el: 'select',
-    enum: [
-      { label: '测试奖品', value: '1' }
-    ],
-    enterProps: {
-      clearable: true
-    },
-    rules: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }]
-  },
-]
+    {
+      label: '奖品名',
+      prop: 'awardName2',
+      el: 'select',
+      enum: [{ label: '测试奖品', value: '1' }],
+      enterProps: {
+        clearable: true
+      },
+      rules: [
+        {
+          required: true,
+          message: 'Please input Activity name',
+          trigger: 'blur'
+        }
+      ]
+    }
+  ]
+  if (value.value.awardName2 === '1') {
+    newColumn.push({
+      label: '奖品名',
+      prop: 'awardName3',
+      el: 'input',
+      rules: [
+        {
+          required: true,
+          message: 'Please input Activity name',
+          trigger: 'blur'
+        }
+      ]
+    })
+  }
+  return newColumn
+})
 
 const modalProps = reactive<Partial<DialogProps>>({
   title: '测试Modal'
 })
 
-const value = reactive<{ [k: string]: any }>({
+const value = ref<{ [k: string]: any }>({
   awardName1: 1
 })
 
+watch(
+  () => value.value,
+  (val) => {
+    console.log(val)
+  }
+)
+
 const onAdd = () => {
-  proModalRef.value?.show({ formData: { awardName: '22222' }, title: '测试0002' })
+  proModalRef.value?.show({
+    formData: { awardName: '22222' },
+    title: '测试0002'
+  })
 }
 
 const onUpdate = (row: any) => {
-	proModalRef.value?.show({ formData: { ...row }, title: '修改' });
-};
+  proModalRef.value?.show({ formData: { ...row }, title: '修改' })
+}
 
 const onSubmit = (val: boolean) => {
   console.log(val)
@@ -308,24 +369,23 @@ const progress = ref<number>(0)
 onMounted(() => {
   if (ipcRender) {
     // 给主进程发通知，让主进程告诉我们当前应用的版本是多少
-    ipcRender.send('checkAppVersion');
+    ipcRender.send('checkAppVersion')
     // 接收主进程发来的通知，检测当前应用版本
-    ipcRender.receive("version", (version: any) => {
-      version.value = version;
-    });
+    ipcRender.receive('version', (version: any) => {
+      version.value = version
+    })
 
     // 给主进程发通知，检测当前应用是否需要更新
-    ipcRender.send('checkForUpdate');
+    ipcRender.send('checkForUpdate')
     // 接收主进程发来的通知，告诉用户当前应用是否需要更新
     ipcRender.receive('message', (data: any) => {
-      text.value = data;
-    });
+      text.value = data
+    })
 
     // 如果当前应用有新版本需要下载，则监听主进程发来的下载进度
     ipcRender.receive('downloadProgress', (data: any) => {
-      progress.value = parseInt(data.percent, 10);
-    });
+      progress.value = parseInt(data.percent, 10)
+    })
   }
 })
-
 </script>

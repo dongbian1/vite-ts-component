@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { provide, ref, useSlots, reactive, watchEffect } from 'vue'
+import { provide, ref, useSlots, reactive, watchEffect, watch } from 'vue'
 import { EnterFormProps, ModalProps, OpenDialog } from './types'
 import { FormInstance } from 'element-plus/es/components/form'
 import FormItem from './components/formItem.vue'
@@ -82,6 +82,14 @@ watchEffect(() => {
     return col
   })
 })
+
+watch(
+  () => props.modelValue,
+  () => {
+    emits('update:modalValue', props.modelValue)
+  },
+  { deep: true }
+)
 
 let modalOptics = reactive<OpenDialog>({})
 
