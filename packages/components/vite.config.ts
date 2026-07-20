@@ -4,22 +4,22 @@ import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
+/**
+ * cjx-zdy-ui 组件库构建配置
+ * 产物目录：cjx-zdy-ui/es（ESM）与 cjx-zdy-ui/lib（CJS）
+ */
 export default defineConfig({
   build: {
     target: 'modules',
-    //打包文件目录
     outDir: 'es',
-    //压缩
+    // 样式由 gulp 单独处理，避免清空已有产物
     emptyOutDir: false,
     minify: true,
-    //css分离
-    // cssCodeSplit: false,
     rollupOptions: {
-      //忽略打包vue文件
+      // peer 依赖与样式源文件不打进包，由使用方 / gulp 处理
       external: [
         'vue',
-        /\.less/,
-        'node_modules',
+        /\.scss/,
         'element-plus',
         '@element-plus/icons-vue'
       ],
@@ -27,22 +27,17 @@ export default defineConfig({
       output: [
         {
           format: 'es',
-          //不用打包成.es.js,这里我们想把它打包成.js
           entryFileNames: '[name].mjs',
-          //让打包目录和我们目录对应
+          // 保持源码目录结构，便于按需引入
           preserveModules: true,
           exports: 'named',
-          //配置打包根目录
           dir: resolve(__dirname, './cjx-zdy-ui/es')
         },
         {
           format: 'cjs',
-          //不用打包成.cjs
           entryFileNames: '[name].js',
-          //让打包目录和我们目录对应
           preserveModules: true,
           exports: 'named',
-          //配置打包根目录
           dir: resolve(__dirname, './cjx-zdy-ui/lib')
         }
       ]
@@ -56,6 +51,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+    // 生成 .d.ts，同步输出到 es / lib
     dts({
       include: ['./index.ts', './src', './t-utils'],
       cleanVueFileName: true,
@@ -65,33 +61,33 @@ export default defineConfig({
         resolve(__dirname, './cjx-zdy-ui/es/'),
         resolve(__dirname, './cjx-zdy-ui/lib/')
       ],
-      //指定使用的tsconfig.json为我们整个项目根目录下掉,如果不配置,你也可以在components下新建tsconfig.json
-      tsconfigPath: resolve(__dirname, '../../tsconfig.json')
+      // 使用本包专用 tsconfig，避免扫到 monorepo 其它目录
+      tsconfigPath: resolve(__dirname, './tsconfig.build.json')
     }),
     {
+      // scss 由 gulp 编译成 css，这里把产物里的 .scss 引用改成 .css
       name: 'style',
-      generateBundle(config, bundle) {
-        //这里可以获取打包后的文件目录以及代码code
-        const keys = Object.keys(bundle)
-
-        for (const key of keys) {
-          const bundler: any = bundle[key as any]
-          //rollup内置方法,将所有输出文件code中的.less换成.css,因为我们当时没有打包less文件
-
-          this.emitFile({
-            type: 'asset',
-            fileName: key, //文件名名不变
-            source: bundler.code.replace(/\.less/g, '.css')
-          })
+      generateBundle(_config, bundle) {
+        for (const key of Object.keys(bundle)) {
+          const chunk = bundle[key]
+          if (chunk.type === 'chunk' && typeof chunk.code === 'string') {
+            chunk.code = chunk.code.replace(/\.scss/g, '.css')
+          }
         }
       }
     }
   ],
   resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '@utils': resolve(__dirname, 't-utils'),
-      '@withInstall': resolve(__dirname, 'withinstall')
-    }
+    alias: [
+      // 必须写在 @ 前面，否则会被 @ 前缀吞掉
+      {
+        find: '@utils',
+        replacement: resolve(__dirname, 't-utils')
+      },
+      {
+        find: /^@\//,
+        replacement: `${resolve(__dirname, 'src')}/`
+      }
+    ]
   }
 })

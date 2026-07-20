@@ -12,10 +12,6 @@
     "rootDir": "./"
   },
 
-  "include": [
-    "src/**/*.ts",
-    "electron-main/**/*.ts",
-    "electron-preload/**/*.ts"
-  ],
+  "include": ["./**/*.ts", "./**/*.vue", "./**/*.tsx"],
   "exclude": ["node_modules", "dist", "typings"]
 }

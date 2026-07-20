@@ -3,6 +3,8 @@ import { BreakPoint, Responsive } from '@/grid/types'
 import { TableColumnCtx } from 'element-plus'
 import ProTable from '.'
 
+type DefaultRow = Record<PropertyKey, any>
+
 export interface SpanMethod {
   functionReturn: {
     rowspan: number
@@ -11,7 +13,7 @@ export interface SpanMethod {
   functionData: {
     row: any
     rowIndex: number
-    column: TableColumnCtx<any>
+    column: TableColumnCtx<DefaultRow>
     columnIndex: number
   }
   functionType?: (
@@ -103,32 +105,42 @@ export type FieldNamesProps = {
   children?: string
 }
 
-export type RenderScope<T> = {
+export type RenderScope<T extends DefaultRow = DefaultRow> = {
   row: T
   $index: number
   column: TableColumnCtx<T>
   [key: string]: any
 }
 
-export type HeaderRenderScope<T> = {
+export type HeaderRenderScope<T extends DefaultRow = DefaultRow> = {
   $index: number
   column: TableColumnCtx<T>
   [key: string]: any
 }
 
-export interface ColumnProps<T = any>
-  extends Partial<
-    Omit<TableColumnCtx<T>, 'children' | 'renderCell' | 'renderHeader'>
-  > {
-  isTag?: boolean // 是否是标签展示
-  hideInTable?: boolean // 是在表格当中隐藏
-  search?: SearchProps | undefined // 搜索项配置
-  enum?: EnumProps[] | ((params?: any) => Promise<any>) // 枚举类型（字典）
-  isFilterEnum?: boolean // 当前单元格值是否根据 enum 格式化（示例：enum 只作为搜索项数据）
-  fieldNames?: FieldNamesProps // 指定 label && value && children 的 key 值
-  headerRender?: (scope: HeaderRenderScope<T>) => VNode // 自定义表头内容渲染（tsx语法）
-  render?: (scope: RenderScope<T>) => VNode | string // 自定义单元格内容渲染（tsx语法）
-  _children?: ColumnProps<T>[] // 多级表头
+/**
+ * 列配置：不直接 extends TableColumnCtx，避免递归实例化过深
+ */
+export type ColumnProps<T extends DefaultRow = DefaultRow> = {
+  type?: TypeProps
+  prop?: string
+  label?: string
+  width?: string | number
+  minWidth?: string | number
+  fixed?: boolean | 'left' | 'right'
+  align?: 'left' | 'center' | 'right'
+  sortable?: boolean | 'custom'
+  showOverflowTooltip?: boolean
+  isTag?: boolean
+  hideInTable?: boolean
+  search?: SearchProps | undefined
+  enum?: EnumProps[] | ((params?: any) => Promise<any>)
+  isFilterEnum?: boolean
+  fieldNames?: FieldNamesProps
+  headerRender?: (scope: HeaderRenderScope<T>) => VNode
+  render?: (scope: RenderScope<T>) => VNode | string
+  _children?: ColumnProps<T>[]
+  [key: string]: any
 }
 
 export type ProTableInstance = Omit<

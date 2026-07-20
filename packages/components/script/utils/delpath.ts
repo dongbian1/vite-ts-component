@@ -1,29 +1,33 @@
 import fs from 'fs'
 import { resolve } from 'path'
 import { componentPath } from './paths'
+
 const stayFile = ['package.json', 'README.md']
 
+/**
+ * 递归清理目录，保留指定文件
+ */
 const delPath = async (path: string) => {
-  let files: string[] = []
+  if (!fs.existsSync(path)) return
 
-  if (fs.existsSync(path)) {
-    files = fs.readdirSync(path)
+  const files = fs.readdirSync(path)
 
-    files.forEach(async (file) => {
-      const curPath = resolve(path, file)
+  for (const file of files) {
+    const curPath = resolve(path, file)
 
-      if (fs.statSync(curPath).isDirectory()) {
-        // recurse
-        if (file != 'node_modules') await delPath(curPath)
-      } else {
-        // delete file
-        if (!stayFile.includes(file)) {
-          fs.unlinkSync(curPath)
-        }
-      }
-    })
+    if (fs.statSync(curPath).isDirectory()) {
+      if (file === 'node_modules') continue
+      await delPath(curPath)
+    } else if (!stayFile.includes(file)) {
+      fs.unlinkSync(curPath)
+    }
+  }
 
-    if (path != `${componentPath}/cjx-zdy-ui`) fs.rmdirSync(path)
+  // 根产物目录本身不删，只清内容
+  if (path !== `${componentPath}/cjx-zdy-ui`) {
+    const remain = fs.readdirSync(path)
+    if (remain.length === 0) fs.rmdirSync(path)
   }
 }
+
 export default delPath

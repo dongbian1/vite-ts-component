@@ -50,8 +50,9 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { BreakPoint } from '@/grid/types'
-import { ColumnProps } from '@/proTable/types'
+import type { BreakPoint } from '@/grid/types'
+import type { ColumnProps } from '@/proTable/types'
+import type { SearchFormProps } from './types'
 import Grid from '@/grid'
 import GridItem from '@/gridItem'
 import SearchFormItem from '@/searchForm/components/searchFormItem.vue'
@@ -61,17 +62,8 @@ defineOptions({
   name: 'SearchForm'
 })
 
-interface ProTableProps {
-  columns?: ColumnProps[] // 搜索配置列
-  searchParam?: { [key: string]: any } // 搜索参数
-  searchCol: number | Record<BreakPoint, number>
-  search: (params: any) => void // 搜索方法
-  reset: (params: any) => void // 重置方法
-  loading?: boolean
-}
-
 // 默认值
-const props = withDefaults(defineProps<ProTableProps>(), {
+const props = withDefaults(defineProps<SearchFormProps>(), {
   columns: () => [],
   searchParam: () => ({})
 })

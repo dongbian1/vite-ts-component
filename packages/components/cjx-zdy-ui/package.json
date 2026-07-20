@@ -1,6 +1,6 @@
 {
   "name": "cjx-zdy-ui",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "基于element-plus二次封装的组件库",
   "main": "lib/index.js",
   "module": "es/index.mjs",
@@ -14,7 +14,12 @@
     "cjx-zdy-ui",
     "vue3组件库"
   ],
-  "author": "cjx",
+  "author": "陈佳鑫",
   "license": "MIT",
-  "typings": "lib/index.d.ts"
+  "typings": "lib/index.d.ts",
+  "peerDependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "element-plus": "^2.3.6",
+    "vue": "^3.5.0"
+  }
 }

@@ -1,21 +1,32 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "jsx": "preserve",
     "strict": true,
     "target": "ES2015",
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "lib": ["esnext", "dom"],
     "rootDirs": ["./", "./packages/components"],
-    "emitDeclarationOnly": true, // 只输出声明文件(ts 产物)
-    "declaration": true, // 自动生成声明文件
+    "emitDeclarationOnly": true,
+    "declaration": true,
     "paths": {
-      "@/*": ["packages/components/src/*"],
-      "@utils/*": ["packages/components/t-utils/*"],
-      "@withInstall/*": ["packages/utils/withinstall/*"]
+      "@/*": ["./packages/components/src/*"],
+      "@utils/*": ["./packages/components/t-utils/*"],
+      "@withInstall/*": ["./packages/utils/withinstall/*"]
     }
-  }
+  },
+  "include": [
+    "packages/components/src/**/*.ts",
+    "packages/components/src/**/*.tsx",
+    "packages/components/src/**/*.vue",
+    "packages/utils/**/*.ts"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/cjx-zdy-ui",
+    "**/dist",
+    "packages/components/script/**"
+  ]
 }

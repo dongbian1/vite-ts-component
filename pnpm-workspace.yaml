@@ -1,4 +1,15 @@
 packages:
-    - 'packages/**'
-    - 'examples'
-    - 'vuePress2'
+  - 'packages/components'
+  - 'packages/utils'
+  - 'examples'
+  - 'docs'
+
+shamefullyHoist: true
+autoInstallPeers: true
+confirmModulesPurge: false
+
+allowBuilds:
+  '@parcel/watcher': true
+  es5-ext: true
+  esbuild: true
+  vue-demi: true

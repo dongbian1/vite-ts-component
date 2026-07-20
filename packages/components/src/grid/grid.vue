@@ -96,7 +96,8 @@ const resize = (e: UIEvent) => {
   }
 }
 
-const slots = useSlots().default!()
+const defaultSlot = useSlots().default
+const slots = defaultSlot ? defaultSlot({}) : []
 
 // 寻找需要开始折叠的字段 index
 const findIndex = () => {

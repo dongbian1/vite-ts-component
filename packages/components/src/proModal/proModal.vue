@@ -31,8 +31,9 @@
 
 <script setup lang="ts">
 import { provide, ref, useSlots, reactive, watchEffect, watch } from 'vue'
+import type { SetupContext } from 'vue'
 import { EnterFormProps, ModalProps, OpenDialog } from './types'
-import { FormInstance } from 'element-plus/es/components/form'
+import { FormInstance } from 'element-plus'
 import FormItem from './components/formItem.vue'
 
 const visible = ref(false)
@@ -54,7 +55,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
 // form表单默认Ref属性
 const formRef = ref<FormInstance>()
 
-const slots = useSlots()
+const slots: SetupContext['slots'] = useSlots()
 // 是否从上级传递了footer 底部按钮，有就使用上级传递，无则使用组件中定义底部按钮，并且调用submit事件
 const isFooter = Object.keys(slots).includes('footer')
 

@@ -4,6 +4,7 @@
 
 <script setup lang="ts" name="tableColumn">
 import { inject, ref, useSlots } from 'vue'
+import type { SetupContext } from 'vue'
 import { ColumnProps } from '../types'
 import RenderTableColumn from './table'
 
@@ -12,7 +13,7 @@ defineOptions({
 })
 
 defineProps<{ column: ColumnProps }>()
-const slots = useSlots()
+const slots: SetupContext['slots'] = useSlots()
 
 const enumMap = inject('enumMap', ref(new Map()))
 </script>

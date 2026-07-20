@@ -8,7 +8,7 @@
   "files": [
     "dist"
   ],
-  "author": "",
+  "author": "陈佳鑫",
   "license": "MIT",
   "scripts": {
     "build": "vite build"
@@ -16,5 +16,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3",
+    "vite": "^5.4.0",
+    "vite-plugin-dts": "^4.5.0"
   }
 }

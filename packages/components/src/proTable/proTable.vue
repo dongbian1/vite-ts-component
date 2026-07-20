@@ -102,8 +102,8 @@
         </el-table-column>
         <!-- other -->
         <TableColumn v-if="!item.type && item.prop" :column="item">
-          <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-            <slot :name="slot" v-bind="scope"></slot>
+          <template v-for="name in slotNames" #[name]="scope">
+            <slot :name="name" v-bind="scope"></slot>
           </template>
         </TableColumn>
       </template>
@@ -127,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, provide, ref } from 'vue'
+import { computed, onMounted, provide, ref, useSlots } from 'vue'
 import { ColumnProps, ProTableProps } from './types'
 import { useTable } from './hooks'
 import SearchForm from '@/searchForm'
@@ -139,7 +139,7 @@ import ColSetting from './components/colSetting.vue'
 import Pagination from './components/pagination.vue'
 import TableColumn from './components/tableColumn.vue'
 
-import './style/index.less'
+import './style/index.scss'
 
 defineOptions({
   name: 'ProTable'
@@ -155,6 +155,8 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   rowKey: 'id',
   searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
 })
+
+const slotNames = computed(() => Object.keys(useSlots()) as string[])
 
 // 是否显示搜索模块
 const isShowSearch = ref(true)
@@ -242,29 +244,26 @@ const setEnumMap = async (col: ColumnProps) => {
 const flatColumnsFunc = (
   columns: ColumnProps[],
   flatArr: ColumnProps[] = []
-) => {
-  columns.forEach(async (col) => {
+): ColumnProps[] => {
+  columns.forEach((col) => {
     if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children))
     flatArr.push(col)
 
-    // 给每一项 column 添加 isShow && isFilterEnum 默认属性
     col.hideInTable = col.hideInTable ?? false
-    // 给每一项 column 添加 isShow && isFilterEnum 默认属性
     col.isFilterEnum = col.isFilterEnum ?? true
 
-    // 设置 enumMap
     setEnumMap(col)
   })
   return flatArr.filter((item) => !item._children?.length)
 }
 
 // flatColumns
-const flatColumns = ref<ColumnProps[]>()
+const flatColumns = ref<ColumnProps[]>([])
 flatColumns.value = flatColumnsFunc(tableColumns.value)
 
 // 过滤需要搜索的配置项
 const searchColumns = flatColumns.value.filter(
-  (item) => item.search?.el || item.search?.render
+  (item) => !!(item.search?.el || item.search?.render)
 )
 
 // 设置搜索表单排序默认值 && 设置搜索表单项的默认值
@@ -287,7 +286,7 @@ searchColumns.sort((a, b) => a.search!.order! - b.search!.order!)
 // 列设置 ==> 过滤掉不需要设置的列
 const colRef = ref()
 const openColSetting = () => colRef.value.openColSetting()
-const colSetting = tableColumns.value!.filter(
+const colSetting = tableColumns.value.filter(
   (item) =>
     !['selection', 'index', 'expand'].includes(item.type!) &&
     item.prop !== 'action' &&

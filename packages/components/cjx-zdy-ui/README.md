@@ -14,6 +14,7 @@ npm i cjx-zdy-ui
 ```
 
 ## 组件引入 main.ts
+
 ```npm
 import CjxUI from 'cjx-zdy-ui'
 

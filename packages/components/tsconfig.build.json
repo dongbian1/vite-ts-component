@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "rootDirs": ["."],
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@utils/*": ["./t-utils/*"]
+    }
+  },
+  "include": [
+    "index.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "t-utils/**/*.ts",
+    "env.d.ts"
+  ],
+  "exclude": ["cjx-zdy-ui", "script", "node_modules", "vite.config.ts"]
+}

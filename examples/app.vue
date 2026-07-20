@@ -14,7 +14,7 @@
     :beforeSearchSubmit="formatParams"
     :dataCallback="formatData"
   >
-    <template #tableHeader="{ selectedListIds, selectedList, isSelected }">
+    <template #tableHeader="{ isSelected }">
       <el-button type="primary" @click="onAdd">新增</el-button>
       <el-button type="primary">导出报表</el-button>
       <el-button type="primary" :disabled="!isSelected">批量删除</el-button>
@@ -45,16 +45,14 @@
   </ProModal>
 </template>
 <script lang="tsx" setup>
-import { onMounted, computed, reactive, ref, watch } from 'vue'
-import { ColumnProps, ProTableInstance } from 'cjx-zdy-ui/es/src/proTable/types'
-import {
+import { computed, reactive, ref, watch } from 'vue'
+import type {
+  ColumnProps,
+  ProTableInstance,
   EnterFormProps,
   ProModalInstance
-} from 'cjx-zdy-ui/es/src/proModal/types'
-import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
-import { DialogProps } from 'element-plus/es/components/dialog'
-// import { ProModalInstance } from '@/proModal/types';
-// import { ProTableInstance } from '@/proTable/types';
+} from 'cjx-zdy-ui'
+import type { TableColumnCtx, DialogProps } from 'element-plus'
 
 const getTabsList = () => {
   return new Promise((resolve) => {
@@ -356,36 +354,4 @@ const onUpdate = (row: any) => {
 const onSubmit = (val: boolean) => {
   console.log(val)
 }
-
-const { ipcRender } = (window as any).electron ?? {}
-
-// 页面上的提示信息
-const text = ref<string>()
-// 当前应用版本信息
-const version = ref<string>()
-// 当前下载进度
-const progress = ref<number>(0)
-
-onMounted(() => {
-  if (ipcRender) {
-    // 给主进程发通知，让主进程告诉我们当前应用的版本是多少
-    ipcRender.send('checkAppVersion')
-    // 接收主进程发来的通知，检测当前应用版本
-    ipcRender.receive('version', (version: any) => {
-      version.value = version
-    })
-
-    // 给主进程发通知，检测当前应用是否需要更新
-    ipcRender.send('checkForUpdate')
-    // 接收主进程发来的通知，告诉用户当前应用是否需要更新
-    ipcRender.receive('message', (data: any) => {
-      text.value = data
-    })
-
-    // 如果当前应用有新版本需要下载，则监听主进程发来的下载进度
-    ipcRender.receive('downloadProgress', (data: any) => {
-      progress.value = parseInt(data.percent, 10)
-    })
-  }
-})
 </script>

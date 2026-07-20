@@ -1,7 +1,6 @@
 import { ComponentPublicInstance, VNode } from 'vue'
 import ProModal from '.'
-import { DialogProps } from 'element-plus/es/components/dialog'
-import { FormProps } from 'element-plus/es/components/form'
+import { DialogProps, FormProps } from 'element-plus'
 
 export interface ModalProps {
   modelValue?: { [k: string]: any } // 双向数据绑定

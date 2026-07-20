@@ -2,34 +2,29 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 
+/**
+ * @npm_cjx/utils 工具包构建配置
+ * 产物目录：dist/es（ESM）与 dist/lib（CJS）
+ */
 export default defineConfig({
   build: {
     target: 'modules',
-    //打包文件目录
     outDir: 'es',
-    //压缩
     minify: true,
-    //css分离
-    //cssCodeSplit: true,
     rollupOptions: {
       input: ['index.ts'],
       output: [
         {
           format: 'es',
-          //不用打包成.es.js,这里我们想把它打包成.js
           entryFileNames: '[name].mjs',
-          //让打包目录和我们目录对应
+          // 保持模块目录结构
           preserveModules: true,
-          //配置打包根目录
           dir: resolve(__dirname, './dist/es')
         },
         {
           format: 'cjs',
-          //不用打包成.mjs
           entryFileNames: '[name].js',
-          //让打包目录和我们目录对应
           preserveModules: true,
-          //配置打包根目录
           dir: resolve(__dirname, './dist/lib')
         }
       ]
@@ -41,19 +36,21 @@ export default defineConfig({
   },
 
   plugins: [
+    // es / lib 各生成一份声明文件
     dts({
       entryRoot: './',
+      include: ['index.ts', 'withinstall'],
       exclude: ['vite.config.ts'],
       outDir: resolve(__dirname, './dist/es'),
-      //指定使用的tsconfig.json为我们整个项目根目录下掉,如果不配置,你也可以在components下新建tsconfig.json
-      tsconfigPath: '../../tsconfig.json'
+      // 使用本包专用 tsconfig，避免扫到 monorepo 其它目录
+      tsconfigPath: resolve(__dirname, './tsconfig.build.json')
     }),
-    //因为这个插件默认打包到es下，我们想让lib目录下也生成声明文件需要再配置一个
     dts({
       entryRoot: './',
+      include: ['index.ts', 'withinstall'],
       exclude: ['vite.config.ts'],
       outDir: resolve(__dirname, './dist/lib'),
-      tsconfigPath: '../../tsconfig.json'
+      tsconfigPath: resolve(__dirname, './tsconfig.build.json')
     })
   ]
 })
